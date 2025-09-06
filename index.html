@@ -3,134 +3,429 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dark Coffee</title>
-  
-  <!-- خط حديث من Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@500;700&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
-  
+  <title>دارك كافيه</title>
   <style>
     body {
       margin: 0;
-      padding: 0;
-      font-family: 'Cairo', sans-serif;
-      color: #f5f5f5;
-      text-align: center;
+      font-family: 'Arial', sans-serif;
+      background: url('https://i.postimg.cc/W4hrD5mk/IMG-7372.jpg') no-repeat center center/cover;
       position: relative;
+      color: #fff;
+      text-align: center;
       min-height: 100vh;
-      overflow-x: hidden;
     }
-
-    /* خلفية الصورة مع ضبابية */
     body::before {
       content: "";
       position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: url('coffee-bg.jpg') no-repeat center center/cover;
-      filter: blur(8px) brightness(0.6);
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: inherit;
+      filter: blur(6px);
       z-index: -1;
     }
-
     header {
-      background: rgba(0, 0, 0, 0.6);
-      padding: 40px 20px;
+      display: flex;
+      align-items: center;
+      background: #000;
+      padding: 8px 15px;
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      height: 70px;
     }
     header img {
-      max-width: 140px;
-      border-radius: 50%;
+      height: 80%;
+      max-height: 60px;
+      object-fit: contain;
+      margin-left: 10px;
     }
     header h1 {
-      margin: 15px 0 5px;
-      font-size: 2.5em;
-      color: #d4a373; /* اللون الذهبي */
-      font-family: 'Playfair Display', 'Cairo', serif;
-      font-weight: 600;
+      font-size: 20px;
+      font-weight: bold;
+      color: #fff;
+      margin: 0;
+      font-family: 'Cairo', sans-serif;
+      white-space: nowrap;
     }
+    main { padding: 90px 20px 70px; }
     .info {
-      margin: 30px 0;
-      font-size: 1.2em;
-      line-height: 1.8;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 10px;
-    }
-    .info-box {
-      width: 280px;
-      text-align: center;
-      background: rgba(18, 18, 18, 0.8); /* خلفية غامقة شفافة فوق الصورة */
+      margin: 15px auto;
       padding: 12px;
+      background: rgba(0,0,0,0.6);
       border-radius: 8px;
-    }
-    .buttons {
-      margin: 30px 0;
+      max-width: 400px;
+      font-size: 18px;
     }
     .btn {
       display: inline-block;
-      margin: 10px;
-      padding: 18px 40px;
-      font-size: 1.4em;
-      color: #121212;
-      background: #d4a373;
-      text-decoration: none;
-      border-radius: 10px;
-      font-weight: bold;
-      transition: 0.3s;
-    }
-    .btn:hover {
-      background: #b5835a;
-    }
-    .call-btn {
-      display: inline-block;
-      margin: 20px 0;
       padding: 12px 25px;
-      font-size: 1.2em;
+      margin: 10px;
+      background: #d4a373;
       color: #fff;
-      background: #28a745;
       text-decoration: none;
       border-radius: 8px;
+      font-size: 18px;
       transition: 0.3s;
+    }
+    .btn:hover { background: #b07a4f; }
+    .call-btn {
+      background: #27ae60;
+      border: 2px solid #145a32;
+      display: block;
+      margin: 15px auto;
+      max-width: 250px;
+    }
+    .whatsapp-btn {
+      background: #25d366;
+      border: 2px solid #128c7e;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin: 15px auto;
+      max-width: 250px;
+      color: #fff;
       font-weight: bold;
     }
-    .call-btn:hover {
-      background: #218838;
+    .whatsapp-btn img { width: 22px; height: 22px; }
+    .page { display: none; padding: 20px; }
+    .active { display: block; }
+    .menu {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px;
+      justify-items: center;
+      margin-top: 20px;
+    }
+    .menu a {
+      background: #222;
+      color: #fff;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      width: 140px;
+      height: 140px;
+      font-size: 18px;
+      overflow: hidden;
+      padding: 10px;
+      text-align: center;
+    }
+    #coffee-page .menu a { background: #000; color: #fff; }
+    .coffee-img {
+      width: 100%; height: 100%;
+      border-radius: 0;
+      object-fit: cover;
+    }
+    .hot-btn {
+      background: url('https://i.postimg.cc/zXhsKkdv/IMG-7385.jpg') no-repeat center center/cover !important;
+      color: #fff !important;
+      font-weight: bold;
+      text-shadow: 1px 1px 4px #000;
+    }
+    .coffee-btn {
+      background: url('https://i.postimg.cc/P5c1HtMC/IMG-7382.webp') no-repeat center center/cover !important;
+      color: #fff !important;
+      font-weight: bold;
+      text-shadow: 1px 1px 4px #000;
+    }
+    .nescafe-btn {
+      background: url('https://i.postimg.cc/MZFBV6hd/IMG-7383.jpg') no-repeat center center/cover !important;
+      color: #fff !important;
+      font-weight: bold;
+      text-shadow: 1px 1px 4px #000;
+    }
+    .herbs-btn {
+      background: url('https://i.postimg.cc/yd5mTcfY/IMG-7384.webp') no-repeat center center/cover !important;
+      color: #fff !important;
+      font-weight: bold;
+      text-shadow: 1px 1px 4px #000;
+    }
+    #almid-page .random-btn,
+    #brazil-page .random-btn {
+      background: url('https://i.postimg.cc/vmT9gGFh/IMG-7373.jpg') no-repeat center center;
+      background-size: 200px 200px;
+      border: 2px solid #fff;
+      font-weight: bold;
+      color: #000;
     }
     footer {
-      background: rgba(0, 0, 0, 0.7);
-      padding: 15px;
-      margin-top: 40px;
-      font-size: 0.9em;
-      color: #aaa;
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      background: rgba(0,0,0,0.8);
+      padding: 6px;
+      display: none;
+      justify-content: center;
+      gap: 8px;
+      z-index: 1000;
     }
+    footer .btn { padding: 8px 15px; font-size: 14px; }
+    .back-btn { background: #e74c3c; }
+    .cart-btn { background: #27ae60; }
+    .popup-overlay {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.7);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 2000;
+    }
+    .popup {
+      background: #fff;
+      color: #000;
+      padding: 20px;
+      border-radius: 10px;
+      text-align: center;
+      width: 300px;
+    }
+    .popup h3 { margin-top: 0; }
+    .counter {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 15px 0;
+      font-size: 20px;
+      gap: 10px;
+    }
+    .counter button {
+      padding: 5px 10px;
+      font-size: 20px;
+      cursor: pointer;
+    }
+    .popup .btn { margin: 5px; font-size: 16px; }
+    .cart-list {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      margin-top: 20px;
+    }
+    .cart-item {
+      background: rgba(0,0,0,0.6);
+      padding: 12px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 3px 6px rgba(0,0,0,0.4);
+    }
+    .cart-item span { font-size: 16px; font-weight: bold; }
+    .cart-controls { display: flex; align-items: center; gap: 8px; }
+    .cart-controls button {
+      background: #d4a373;
+      border: none;
+      color: #fff;
+      font-size: 16px;
+      padding: 5px 10px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+    .cart-controls button:hover { background: #b07a4f; }
+    .delete-btn { background: #e74c3c !important; }
   </style>
 </head>
 <body>
+<header>
+  <img src="https://i.postimg.cc/3RPJLBDz/IMG-3262.jpg" alt="شعار دارك كافيه">
+  <h1>دارك كافيه | Dark Coffee</h1>
+</header>
 
-  <header>
-    <img src="logo.jpeg" alt="شعار Dark Coffee">
-    <h1>دارك كافيه – Dark Coffee</h1>
-  </header>
+<main>
+  <div id="home-page" class="page active">
+    <div class="info">📍 الرمثا - مقابل مستشفى الرمثا</div>
+    <div class="info">⏰ مفتوح 24 ساعة</div>
+    <div class="info">🚚 لدينا خدمة توصيل</div>
+    <div class="info call-btn">
+      <a href="tel:0787710009" style="color:#fff; text-decoration:none;">📞 اتصل الآن: 0787710009</a>
+    </div>
+    <div class="info whatsapp-btn">
+      <a href="https://wa.me/962787710009" target="_blank" style="color:#fff; text-decoration:none; display:flex; align-items:center; gap:6px;">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="واتساب"> تواصل عبر واتساب
+      </a>
+    </div>
+    <a href="#" class="btn" onclick="showPage('menu-page')">اطلب الآن</a>
+  </div>
 
-  <section class="info">
-    <div class="info-box">📍 الرمثا - مقابل مستشفى الرمثا</div>
-    <div class="info-box">🕒 مفتوح 24 ساعة</div>
-    <div class="info-box">🚚 لدينا خدمة توصيل</div>
+  <div id="menu-page" class="page">
+    <h2>🍽️ قائمة المنتجات</h2>
+    <div class="menu">
+      <a href="#" onclick="showPage('hot-page')" class="hot-btn">☕ مشروبات ساخنة</a>
+      <a href="#">🥤 مشروبات باردة</a>
+      <a href="#">🍟 شيبس</a>
+      <a href="#">🍪 بسكويت</a>
+      <a href="#">🍫 شوكولاتة</a>
+      <a href="#">🍭 سكاكر</a>
+      <a href="#">🚬 سجائر ومعسل</a>
+      <a href="#">➕ المزيد</a>
+    </div>
+  </div>
 
-    <!-- زر الاتصال المباشر -->
-    <a href="tel:0787710009" class="call-btn">
-      📞 اتصل بنا: <span dir="ltr">0787710009</span>
-    </a>
-  </section>
+  <div id="hot-page" class="page">
+    <h2>☕ المشروبات الساخنة</h2>
+    <div class="menu">
+      <a href="#" onclick="showPage('coffee-page')" class="coffee-btn">القهوة</a>
+      <a href="#" class="nescafe-btn">النسكافيه والمزيد</a>
+      <a href="#" class="herbs-btn">الأعشاب والمزيد</a>
+    </div>
+  </div>
 
-  <section class="buttons">
-    <a href="menu.html" class="btn">اطلب الآن</a>
-  </section>
+  <div id="coffee-page" class="page">
+    <h2>☕ القهوة</h2>
+    <div class="menu">
+      <a href="#" onclick="showPage('almid-page')">
+        <img src="https://i.postimg.cc/bwSFQ99K/IMG-7370.jpg" alt="قهوة العميد" class="coffee-img">
+      </a>
+      <a href="#" onclick="showPage('brazil-page')">
+        <img src="https://i.postimg.cc/tR1S0zL7/IMG-7371.png" alt="قهوة البرازيلي" class="coffee-img">
+      </a>
+    </div>
+  </div>
 
-  <footer>
-    <p>جميع الحقوق محفوظة © 2025 دارك كافيه</p>
-  </footer>
+  <div id="almid-page" class="page">
+    <h2>☕ قهوة العميد</h2>
+    <div id="almid-options" class="menu"></div>
+  </div>
 
+  <div id="brazil-page" class="page">
+    <h2>☕ قهوة البرازيلي</h2>
+    <div id="brazil-options" class="menu"></div>
+  </div>
+
+  <div id="cart-page" class="page">
+    <h2 class="cart-title">🛒 سلتك</h2>
+    <div id="cart-items" class="cart-list"></div>
+    <div style="margin-top:20px;">
+      <a href="#" class="btn" onclick="clearCart()" style="background:#e74c3c;">🗑️ تفريغ السلة</a>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <a href="#" class="btn back-btn" onclick="goBack()">⬅️ رجوع</a>
+  <a href="#" class="btn cart-btn" id="cart-footer-btn" onclick="showCart()">🛒 تصفح سلتك</a>
+</footer>
+
+<div class="popup-overlay" id="popup">
+  <div class="popup">
+    <h3 id="popup-title">اختر العدد</h3>
+    <div class="counter">
+      <button onclick="changeQty(-1)">➖</button>
+      <span id="qty">1</span>
+      <button onclick="changeQty(1)">➕</button>
+    </div>
+    <a href="#" class="btn" onclick="confirmAdd()">✅ موافق</a>
+    <a href="#" class="btn" style="background:#e74c3c;" onclick="closePopup()">❌ إلغاء</a>
+  </div>
+</div>
+
+<div class="popup-overlay" id="order-popup">
+  <div class="popup">
+    <h3>✅ تم حفظ طلبك</h3>
+    <p>الرجاء الضغط على إرسال لإكمال الطلب عبر واتساب</p>
+    <a href="#" class="btn" onclick="sendOrder()">📩 أرسل عبر واتساب</a>
+    <a href="#" class="btn" style="background:#e74c3c;" onclick="closeOrderPopup()">❌ إلغاء</a>
+  </div>
+</div>
+
+<script>
+  let pageHistory = [];
+  let cart = [];
+  let currentItem = "";
+  let currentQty = 1;
+
+  const coffeeOptions = ["بدون إضافة سكر (سادة)","القليل من السكر","وسط","فوق الوسط","حلوة","حلوة زيادة"];
+
+  function showPage(pageId) {
+    const currentPage = document.querySelector('.page.active');
+    if (currentPage) {
+      if (currentPage.id !== pageId) {
+        pageHistory.push(currentPage.id);
+      }
+      currentPage.classList.remove('active');
+    }
+    document.getElementById(pageId).classList.add('active');
+    document.querySelector('footer').style.display = (pageId === 'home-page') ? 'none' : 'flex';
+
+    // ✅ تغيير زر السلة فقط في صفحة السلة
+    const cartFooterBtn = document.getElementById("cart-footer-btn");
+    if (pageId === "cart-page") {
+      cartFooterBtn.textContent = "✅ نفذ الطلب";
+      cartFooterBtn.setAttribute("onclick","confirmOrder()");
+    } else {
+      cartFooterBtn.textContent = "🛒 تصفح سلتك";
+      cartFooterBtn.setAttribute("onclick","showCart()");
+    }
+  }
+
+  function goBack() {
+    if (pageHistory.length > 0) {
+      const lastPage = pageHistory.pop();
+      document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+      document.getElementById(lastPage).classList.add('active');
+      if (lastPage === 'home-page') document.querySelector('footer').style.display = 'none';
+    }
+  }
+
+  function openPopup(item) {
+    currentItem = item;
+    currentQty = 1;
+    document.getElementById("qty").textContent = currentQty;
+    document.getElementById("popup-title").textContent = item;
+    document.getElementById("popup").style.display = "flex";
+  }
+  function closePopup() { document.getElementById("popup").style.display = "none"; }
+  function changeQty(val) { currentQty = Math.max(1, Math.min(99, currentQty + val)); document.getElementById("qty").textContent = currentQty; }
+  function confirmAdd() {
+    const existing = cart.find(c => c.name === currentItem);
+    if (existing) existing.qty += currentQty; else cart.push({ name: currentItem, qty: currentQty });
+    closePopup(); alert("تمت إضافة " + currentItem + " × " + currentQty + " ✅");
+  }
+
+  function showCart() {
+    const cartList = document.getElementById("cart-items");
+    cartList.innerHTML = "";
+    if (cart.length === 0) { cartList.innerHTML = "<p>🛒 السلة فارغة</p>"; }
+    else {
+      cart.forEach((item,i) => {
+        const div=document.createElement("div"); div.className="cart-item";
+        const name=document.createElement("span"); name.textContent=item.name;
+        const controls=document.createElement("div"); controls.className="cart-controls";
+        const minus=document.createElement("button"); minus.textContent="➖"; minus.onclick=()=>updateQty(i,-1);
+        const qty=document.createElement("span"); qty.textContent=item.qty;
+        const plus=document.createElement("button"); plus.textContent="➕"; plus.onclick=()=>updateQty(i,1);
+        const del=document.createElement("button"); del.textContent="❌"; del.className="delete-btn"; del.onclick=()=>deleteItem(i);
+        controls.append(minus,qty,plus,del); div.append(name,controls); cartList.appendChild(div);
+      });
+    }
+    showPage('cart-page');
+  }
+  function updateQty(i,v){ cart[i].qty=Math.max(1,cart[i].qty+v); showCart(); }
+  function deleteItem(i){ cart.splice(i,1); showCart(); }
+  function clearCart(){ cart=[]; showCart(); }
+
+  function confirmOrder(){ document.getElementById("order-popup").style.display="flex"; }
+  function closeOrderPopup(){ document.getElementById("order-popup").style.display="none"; }
+
+  function sendOrder() {
+    if (cart.length === 0) { alert("⚠️ السلة فارغة"); return; }
+    let text="🛒 طلب جديد من دارك كافيه:\n\n";
+    cart.forEach((it,i)=>{ text+=`${i+1}- ${it.name} × ${it.qty}\n`; });
+    text+="\n📍 الموقع: الرمثا - مقابل مستشفى الرمثا\n📞 للتواصل: 0787710009\n";
+    const phone="962787710009";
+    const url=`https://wa.me/${phone}?text=${encodeURIComponent(text)}`;
+    window.open(url,"_blank");
+    closeOrderPopup();
+  }
+
+  window.onload=function(){
+    const almid=document.getElementById("almid-options");
+    const brazil=document.getElementById("brazil-options");
+    coffeeOptions.forEach(opt=>{
+      const b1=document.createElement("a"); b1.className="random-btn"; b1.href="#"; b1.textContent=opt; b1.onclick=()=>openPopup("قهوة العميد - "+opt); almid.appendChild(b1);
+      const b2=document.createElement("a"); b2.className="random-btn"; b2.href="#"; b2.textContent=opt; b2.onclick=()=>openPopup("قهوة البرازيلي - "+opt); brazil.appendChild(b2);
+    });
+  }
+</script>
 </body>
 </html>
