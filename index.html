@@ -314,7 +314,7 @@
   let currentItem = "";
   let currentQty = 1;
   const coffeeOptions = [
-    "بدون إضافة سكر (سادة)",
+    "بدون إضافة سكر", // ✅ أزلنا كلمة (سادة)
     "القليل من السكر",
     "وسط",
     "فوق الوسط",
@@ -432,8 +432,6 @@
     cart.forEach((item) => {
       orderText += `- ${item.name} (عدد ${item.qty})\n`;
     });
-    orderText += "\n📍 الموقع: الرمثا - مقابل مستشفى الرمثا\n";
-    orderText += "📞 للتواصل: 0787710009\n";
     const phoneNumber = "962787710009";
     const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(orderText)}`;
     window.open(url, "_blank");
