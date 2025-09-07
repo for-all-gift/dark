@@ -1,19 +1,30 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>دارك كافيه</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    
     body {
       margin: 0;
-      font-family: 'Arial', sans-serif;
+      font-family: 'Cairo', 'Arial', sans-serif;
       background: url('https://i.postimg.cc/W4hrD5mk/IMG-7372.jpg') no-repeat center center/cover;
       position: relative;
       color: #fff;
       text-align: center;
       min-height: 100vh;
+      overflow-x: hidden;
     }
+    
     body::before {
       content: "";
       position: fixed;
@@ -21,7 +32,9 @@
       background: inherit;
       filter: blur(6px);
       z-index: -1;
+      transform: scale(1.02);
     }
+    
     header {
       display: flex;
       align-items: center;
@@ -31,304 +44,622 @@
       top: 0; left: 0; right: 0;
       z-index: 1000;
       height: 70px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.5);
     }
-    header img {
-      height: 80%;
-      max-height: 60px;
-      object-fit: contain;
-      margin-left: 10px;
+    
+    header img { 
+      height: 80%; 
+      max-height: 60px; 
+      object-fit: contain; 
+      margin-left: 10px; 
+      border-radius: 5px;
     }
-    header h1 {
-      font-size: 26px;   /* تكبير العنوان */
-      font-weight: bold;
+    
+    header h1 { 
+      font-size: 26px; 
+      font-weight: bold; 
+      color: #fff; 
+      margin: 0; 
+      margin-right: 12px; 
+      white-space: nowrap; 
+    }
+    
+    main { 
+      padding: 90px 20px 70px; 
+      min-height: calc(100vh - 70px);
+    }
+    
+    .info { 
+      margin: 15px auto; 
+      padding: 12px; 
+      background: rgba(0,0,0,0.6); 
+      border-radius: 8px; 
+      max-width: 400px; 
+      font-size: 18px; 
+      backdrop-filter: blur(4px);
+      animation: fadeIn 0.5s ease;
+    }
+    
+    .btn { 
+      display: inline-block; 
+      padding: 12px 25px; 
+      margin: 10px; 
+      background: #d4a373; 
+      color: #fff; 
+      text-decoration: none; 
+      border-radius: 8px; 
+      font-size: 18px; 
+      transition: all 0.3s ease;
+      border: none;
+      cursor: pointer;
+    }
+    
+    .btn:hover { 
+      background: #b07a4f; 
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+    
+    .call-btn { 
+      background: #27ae60; 
+      border: 2px solid #145a32; 
+      display:block; 
+      margin:15px auto; 
+      max-width:250px; 
+    }
+    
+    .whatsapp-btn { 
+      background:#25d366; 
+      border:2px solid #128c7e; 
+      display:flex; 
+      align-items:center; 
+      justify-content:center; 
+      gap:8px; 
+      margin:15px auto; 
+      max-width:250px; 
+      color:#fff; 
+      font-weight:bold; 
+    }
+    
+    .whatsapp-btn img { 
+      width:22px; 
+      height:22px; 
+    }
+    
+    .page { 
+      display:none; 
+      padding:20px;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity 0.4s ease, transform 0.4s ease;
+      position: absolute;
+      top: 70px;
+      left: 0;
+      right: 0;
+      bottom: 60px;
+      overflow-y: auto;
+    }
+    
+    .page.active {
+      display: block;
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    .menu { 
+      display:grid; 
+      grid-template-columns:repeat(2,1fr); 
+      gap:15px; 
+      justify-items:center; 
+      margin-top:20px; 
+    }
+    
+    .menu a { 
+      background:#222; 
+      color:#fff; 
+      border-radius:8px; 
+      display:flex; 
+      align-items:center; 
+      justify-content:center; 
+      text-decoration:none; 
+      width:140px; 
+      height:140px; 
+      font-size:18px; 
+      overflow:hidden; 
+      padding:10px; 
+      text-align:center; 
+      transition: all 0.3s ease;
+      transform: scale(1);
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+    
+    .menu a:hover {
+      transform: scale(1.05);
+      box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+    }
+    
+    #coffee-page .menu a, #nescafe-page .menu a { 
+      background:#000; 
+      color:#fff; 
+    }
+    
+    .coffee-img { 
+      width:100%; 
+      height:100%; 
+      object-fit:cover; 
+      border-radius: 5px;
+      transition: transform 0.3s ease;
+    }
+    
+    .coffee-img:hover {
+      transform: scale(1.05);
+    }
+    
+    .hot-btn { 
+      background: url('https://i.postimg.cc/zXhsKkdv/IMG-7385.jpg') no-repeat center center/cover !important; 
+      color:#fff !important; 
+      font-weight:bold; 
+      text-shadow:1px 1px 4px #000; 
+    }
+    
+    .coffee-btn { 
+      background: url('https://i.postimg.cc/P5c1HtMC/IMG-7382.webp') no-repeat center center/cover !important; 
+      color:#fff !important; 
+      font-weight:bold; 
+      text-shadow:1px 1px 4px #000; 
+    }
+    
+    .nescafe-btn { 
+      background: url('https://i.postimg.cc/MZFBV6hd/IMG-7383.jpg') no-repeat center center/cover !important; 
+      color:#fff !important; 
+      font-weight:bold; 
+      text-shadow:1px 1px 4px #000; 
+    }
+    
+    .herbs-btn { 
+      background: url('https://i.postimg.cc/yd5mTcfY/IMG-7384.webp') no-repeat center center/cover !important; 
+      color:#fff !important; 
+      font-weight:bold; 
+      text-shadow:1px 1px 4px #000; 
+    }
+    
+    footer { 
+      position: fixed; 
+      bottom: 0; 
+      left: 0; 
+      right: 0; 
+      background: rgba(0,0,0,0.8); 
+      padding: 10px; 
+      display: none; 
+      justify-content: center; 
+      gap: 10px; 
+      z-index: 1000; 
+      backdrop-filter: blur(5px);
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+    
+    footer .btn { 
+      padding: 10px 15px; 
+      font-size: 14px; 
+    }
+    
+    .back-btn { 
+      background:#e74c3c; 
+    }
+    
+    .cart-btn { 
+      background:#27ae60; 
+      display:flex; 
+      align-items:center; 
+      gap:8px; 
+    }
+    
+    .popup-overlay { 
+      position: fixed; 
+      top:0; 
+      left:0; 
+      right:0; 
+      bottom:0; 
+      background: rgba(0,0,0,0.85); 
+      display:none; 
+      align-items:center; 
+      justify-content:center; 
+      z-index:2000; 
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    
+    .popup-overlay.active {
+      display: flex;
+      opacity: 1;
+    }
+    
+    .popup { 
+      background: rgba(0, 0, 0, 0.9);
       color: #fff;
-      margin: 0;
-      margin-right: 12px; /* تقريبه لليسار */
-      font-family: 'Cairo', sans-serif;
-      white-space: nowrap;
+      padding: 25px;
+      border-radius: 12px;
+      text-align: center;
+      width: 90%;
+      max-width: 350px;
+      transform: scale(0.9);
+      transition: transform 0.3s ease;
+      box-shadow: 0 5px 25px rgba(0,0,0,0.5);
+      border: 1px solid rgba(255, 255, 255, 0.1);
     }
-    main { padding: 90px 20px 70px; }
-    .info {
-      margin: 15px auto;
-      padding: 12px;
-      background: rgba(0,0,0,0.6);
-      border-radius: 8px;
-      max-width: 400px;
-      font-size: 18px;
+    
+    .popup-overlay.active .popup {
+      transform: scale(1);
     }
-    .btn {
-      display: inline-block;
-      padding: 12px 25px;
-      margin: 10px;
+    
+    .popup h3 { 
+      margin-top:0; 
+      margin-bottom: 15px;
+      color: #fff;
+      font-size: 22px;
+    }
+    
+    .popup p {
+      margin-bottom: 20px;
+      color: #ddd;
+    }
+    
+    .sugar-btn { 
+      display:block; 
+      margin:8px 0; 
+      padding:12px; 
+      border-radius:6px; 
+      background: rgba(255,255,255,0.1); 
+      color:#fff; 
+      font-size:16px; 
+      text-decoration:none; 
+      transition: all 0.2s ease;
+    }
+    
+    .sugar-btn:hover {
       background: #d4a373;
-      color: #fff;
-      text-decoration: none;
-      border-radius: 8px;
-      font-size: 18px;
-      transition: 0.3s;
     }
-    .btn:hover { background: #b07a4f; }
-    .call-btn {
-      background: #27ae60;
-      border: 2px solid #145a32;
-      display: block;
-      margin: 15px auto;
-      max-width: 250px;
+    
+    .counter { 
+      display:flex; 
+      justify-content:center; 
+      align-items:center; 
+      margin:15px 0; 
+      font-size:20px; 
+      gap:10px; 
     }
-    .whatsapp-btn {
-      background: #25d366;
-      border: 2px solid #128c7e;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      margin: 15px auto;
-      max-width: 250px;
-      color: #fff;
-      font-weight: bold;
-    }
-    .whatsapp-btn img { width: 22px; height: 22px; }
-    .page { display: none; padding: 20px; }
-    .active { display: block; }
-    .menu {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 15px;
-      justify-items: center;
-      margin-top: 20px;
-    }
-    .menu a {
-      background: #222;
-      color: #fff;
-      border-radius: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-decoration: none;
-      width: 140px;
-      height: 140px;
-      font-size: 18px;
-      overflow: hidden;
-      padding: 10px;
-      text-align: center;
-    }
-    #coffee-page .menu a { background: #000; color: #fff; }
-    .coffee-img { width: 100%; height: 100%; object-fit: cover; }
-    .hot-btn {
-      background: url('https://i.postimg.cc/zXhsKkdv/IMG-7385.jpg') no-repeat center center/cover !important;
-      color: #fff !important; font-weight: bold; text-shadow: 1px 1px 4px #000;
-    }
-    .coffee-btn {
-      background: url('https://i.postimg.cc/P5c1HtMC/IMG-7382.webp') no-repeat center center/cover !important;
-      color: #fff !important; font-weight: bold; text-shadow: 1px 1px 4px #000;
-    }
-    .nescafe-btn {
-      background: url('https://i.postimg.cc/MZFBV6hd/IMG-7383.jpg') no-repeat center center/cover !important;
-      color: #fff !important; font-weight: bold; text-shadow: 1px 1px 4px #000;
-    }
-    .herbs-btn {
-      background: url('https://i.postimg.cc/yd5mTcfY/IMG-7384.webp') no-repeat center center/cover !important;
-      color: #fff !important; font-weight: bold; text-shadow: 1px 1px 4px #000;
-    }
-    footer {
-      position: fixed;
-      bottom: 0; left: 0; right: 0;
-      background: rgba(0,0,0,0.8);
-      padding: 6px;
-      display: none;
-      justify-content: center;
-      gap: 8px;
-      z-index: 1000;
-    }
-    footer .btn { padding: 8px 15px; font-size: 14px; }
-    .back-btn { background: #e74c3c; }
-    .cart-btn { background: #27ae60; }
-    /* popups */
-    .popup-overlay {
-      position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(0,0,0,0.7);
-      display: none;
-      align-items: center;
-      justify-content: center;
-      z-index: 2000;
-    }
-    .popup {
-      background: url('https://i.postimg.cc/kM1GcB6Q/IMG-7373.jpg') no-repeat center center/cover;
-      color: #000;
-      padding: 20px;
-      border-radius: 10px;
-      text-align: center;
-      width: 320px;
-    }
-    .popup h3 { margin-top: 0; color:#000; }
-    .sugar-btn {
-      display: block;
-      margin: 8px 0;
-      padding: 10px;
-      border-radius: 6px;
-      background: rgba(0,0,0,0.7);
-      color: #fff;
-      font-size: 16px;
-      text-decoration: none;
-    }
-    .counter {
-      display: flex; justify-content: center; align-items: center;
-      margin: 15px 0; font-size: 20px; gap: 10px;
-    }
-    .counter button { padding: 5px 10px; font-size: 20px; cursor: pointer; }
-    .cart-item {
+    
+    .counter button { 
+      padding:8px 15px; 
+      font-size:20px; 
+      cursor:pointer; 
       background: rgba(255,255,255,0.1);
-      padding: 12px; margin: 8px 0; border-radius: 8px;
-      display: flex; justify-content: space-between; align-items: center;
-    }
-    .cart-item span { flex-grow: 1; text-align: right; }
-    .delete-btn { background: #e74c3c; color: #fff; border:none; padding:4px 8px; border-radius:4px; }
-    .qty-btn { background: #3498db; color: #fff; border:none; padding:4px 8px; border-radius:4px; }
-    /* نافذة تأكيد تفريغ السلة بخلفية سوداء ضبابية */
-    .dark-popup {
-      background: rgba(0,0,0,0.75);
-      backdrop-filter: blur(6px);
       color: #fff;
+      border: none;
+      border-radius: 4px;
+      transition: all 0.2s ease;
     }
-    .dark-popup h3 { color:#fff; }
-    /* Toast */
-    #toast {
-      visibility: hidden;
-      min-width: 250px;
-      color: #fff;
-      text-align: center;
-      border-radius: 8px;
-      padding: 12px;
-      position: fixed;
-      left: 50%;
-      bottom: 30px;
-      transform: translateX(-50%);
-      z-index: 3000;
-      font-size: 16px;
+    
+    .counter button:hover {
+      background: #d4a373;
     }
-    #toast.show {
-      visibility: visible;
-      animation: fadein 0.5s, fadeout 0.5s 2.5s;
+    
+    .cart-item { 
+      background: rgba(255,255,255,0.1); 
+      padding:12px; 
+      margin:8px 0; 
+      border-radius:8px; 
+      display:flex; 
+      justify-content:space-between; 
+      align-items:center; 
+      gap:8px; 
+      flex-wrap:wrap; 
+      backdrop-filter: blur(4px);
+      animation: slideIn 0.3s ease;
     }
-    #toast.success { background-color: rgba(39, 174, 96, 0.9); } /* أخضر */
-    #toast.error { background-color: rgba(231, 76, 60, 0.9); }   /* أحمر */
-    @keyframes fadein { from {bottom: 0; opacity: 0;} to {bottom: 30px; opacity: 1;} }
-    @keyframes fadeout { from {bottom: 30px; opacity: 1;} to {bottom: 0; opacity: 0;} }
+    
+    .cart-item .name { 
+      flex:1; 
+      text-align:right; 
+      padding-right:8px; 
+      min-width:120px; 
+    }
+    
+    .cart-item .counter-inline { 
+      display:flex; 
+      align-items:center; 
+      gap:8px; 
+    }
+    
+    .delete-btn { 
+      background:#e74c3c; 
+      color:#fff; 
+      border:none; 
+      padding:6px 12px; 
+      border-radius:4px; 
+      cursor:pointer;
+      transition: all 0.2s ease;
+    }
+    
+    .delete-btn:hover {
+      background: #c0392b;
+    }
+    
+    .qty-btn { 
+      background:#3498db; 
+      color:#fff; 
+      border:none; 
+      padding:4px 8px; 
+      border-radius:4px; 
+      cursor:pointer;
+      transition: all 0.2s ease;
+    }
+    
+    .qty-btn:hover {
+      background: #2980b9;
+    }
+    
+    .qty-display { 
+      min-width:60px; 
+      text-align:center; 
+      font-weight:bold; 
+      color:#fff; 
+    }
+    
+    .dark-popup { 
+      background: rgba(0,0,0,0.9); 
+      backdrop-filter: blur(10px);
+      color:#fff; 
+    }
+    
+    .dark-popup h3 { 
+      color:#fff; 
+    }
+    
+    #toast { 
+      visibility:hidden; 
+      min-width:250px; 
+      color:#fff; 
+      text-align:center; 
+      border-radius:8px; 
+      padding:12px; 
+      position:fixed; 
+      left:50%; 
+      bottom:30px; 
+      transform:translateX(-50%); 
+      z-index:3000; 
+      font-size:16px; 
+      backdrop-filter: blur(4px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    }
+    
+    #toast.show { 
+      visibility:visible; 
+      animation:fadein 0.5s, fadeout 0.5s 2.5s; 
+    }
+    
+    #toast.success { 
+      background-color: rgba(39,174,96,0.9); 
+      border: 1px solid #145a32;
+    }
+    
+    #toast.error { 
+      background-color: rgba(231,76,60,0.9); 
+      border: 1px solid #c0392b;
+    }
+    
+    @keyframes fadein { 
+      from { bottom:0; opacity:0; } 
+      to { bottom:30px; opacity:1; } 
+    }
+    
+    @keyframes fadeout { 
+      from { bottom:30px; opacity:1; } 
+      to { bottom:0; opacity:0; } 
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    
+    @keyframes slideIn {
+      from { 
+        opacity: 0;
+        transform: translateX(20px);
+      }
+      to { 
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+    
+    /* small responsive tweak */
+    @media (max-width:420px) {
+      .menu a { width:120px; height:120px; font-size:16px; }
+      .cart-item .name { min-width:90px; }
+      header h1 { font-size: 22px; }
+      .popup { padding: 20px 15px; }
+    }
   </style>
 </head>
 <body>
 <header>
-  <img src="https://i.postimg.cc/3RPJLBDz/IMG-3262.jpg" alt="شعار دارك كافيه">
+  <img src="https://i.postimg.cc/3RPJLBDz/IMG-3262.jpg" alt="شعار دارك كافيه" />
   <h1>دارك كافيه | Dark Coffee</h1>
 </header>
+
 <main>
+  <!-- home -->
   <div id="home-page" class="page active">
     <div class="info">📍 الرمثا - مقابل مستشفى الرمثا</div>
     <div class="info">⏰ مفتوح 24 ساعة</div>
     <div class="info">🚚 لدينا خدمة توصيل</div>
-    <div class="info call-btn">
-      <a href="tel:0787710009" style="color:#fff; text-decoration:none;">📞 اتصل الآن: 0787710009</a>
-    </div>
-    <div class="info whatsapp-btn">
-      <a href="https://wa.me/962787710009" target="_blank" style="color:#fff; text-decoration:none; display:flex; align-items:center; gap:6px;">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="واتساب"> تواصل عبر واتساب
-      </a>
-    </div>
-    <a href="#" class="btn" onclick="showPage('menu-page')">اطلب الآن</a>
+    <div class="info call-btn"><a href="tel:0787710009" style="color:#fff; text-decoration:none;">📞 اتصل الآن: 0787710009</a></div>
+    <div class="info whatsapp-btn"><a href="https://wa.me/962787710009" target="_blank" style="color:#fff; text-decoration:none; display:flex; align-items:center; gap:6px;"><img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="واتساب"> تواصل عبر واتساب</a></div>
+    <a href="#" class="btn" onclick="showPage('menu-page'); return false;">اطلب الآن</a>
   </div>
 
+  <!-- menu -->
   <div id="menu-page" class="page">
     <h2>🍽️ قائمة المنتجات</h2>
     <div class="menu">
-      <a href="#" onclick="showPage('hot-page')" class="hot-btn">☕ مشروبات ساخنة</a>
-      <a href="#">🥤 مشروبات باردة</a>
-      <a href="#">🍟 شيبس</a>
-      <a href="#">🍪 بسكويت</a>
-      <a href="#">🍫 شوكولاتة</a>
-      <a href="#">🍭 سكاكر</a>
-      <a href="#">🚬 سجائر ومعسل</a>
-      <a href="#">➕ المزيد</a>
+      <a href="#" onclick="showPage('hot-page'); return false;" class="hot-btn">☕ مشروبات ساخنة</a>
+      <a href="#" onclick="showComingSoon(); return false;">🥤 مشروبات باردة</a>
+      <a href="#" onclick="showComingSoon(); return false;">🍟 شيبس</a>
+      <a href="#" onclick="showComingSoon(); return false;">🍪 بسكويت</a>
+      <a href="#" onclick="showComingSoon(); return false;">🍫 شوكولاتة</a>
+      <a href="#" onclick="showComingSoon(); return false;">🍭 سكاكر</a>
+      <a href="#" onclick="showComingSoon(); return false;">🚬 سجائر ومعسل</a>
+      <a href="#" onclick="showComingSoon(); return false;">➕ المزيد</a>
     </div>
   </div>
 
+  <!-- hot -->
   <div id="hot-page" class="page">
     <h2>☕ المشروبات الساخنة</h2>
     <div class="menu">
-      <a href="#" onclick="showPage('coffee-page')" class="coffee-btn">القهوة</a>
-      <a href="#" class="nescafe-btn">النسكافيه والمزيد</a>
-      <a href="#" class="herbs-btn">الأعشاب والمزيد</a>
+      <a href="#" onclick="showPage('coffee-page'); return false;" class="coffee-btn">القهوة</a>
+      <a href="#" onclick="showPage('nescafe-page'); return false;" class="nescafe-btn">النسكافيه والمزيد</a>
+      <a href="#" onclick="showComingSoon(); return false;" class="herbs-btn">الأعشاب والمزيد</a>
     </div>
   </div>
 
+  <!-- coffee -->
   <div id="coffee-page" class="page">
     <h2>☕ القهوة</h2>
     <div class="menu">
-      <a href="#" onclick="openSugarPopup('قهوة العميد')">
-        <img src="https://i.postimg.cc/bwSFQ99K/IMG-7370.jpg" alt="قهوة العميد" class="coffee-img">
+      <a href="#" onclick="openSugarPopup('قهوة العميد'); return false;"><img src="https://i.postimg.cc/bwSFQ99K/IMG-7370.jpg" alt="قهوة العميد" class="coffee-img"></a>
+      <a href="#" onclick="openSugarPopup('قهوة البرازيلي'); return false;"><img src="https://i.postimg.cc/tR1S0zL7/IMG-7371.png" alt="قهوة البرازيلي" class="coffee-img"></a>
+    </div>
+  </div>
+
+  <!-- nescafe with backgrounds (merged) -->
+  <div id="nescafe-page" class="page">
+    <h2>☕ النسكافيه والمزيد</h2>
+    <div class="menu">
+      <a href="#" onclick="openSugarPopup('نسكافية'); return false;"
+         style="background:url('https://i.postimg.cc/QMz94C0c/IMG-7391.jpg') no-repeat center center/cover; color:#fff; font-weight:bold; text-shadow:1px 1px 4px #000;">
+         نسكافية
       </a>
-      <a href="#" onclick="openSugarPopup('قهوة البرازيلي')">
-        <img src="https://i.postimg.cc/tR1S0zL7/IMG-7371.png" alt="قهوة البرازيلي" class="coffee-img">
+      <a href="#" onclick="openSugarPopup('نسكافية كراميل'); return false;"
+         style="background:url('https://i.postimg.cc/DzrH542M/IMG-7392.jpg') no-repeat center center/cover; color:#fff; font-weight:bold; text-shadow:1px 1px 4px #000;">
+         نسكافية كراميل
+      </a>
+      <a href="#" onclick="openSugarPopup('نسكافية بالبندق'); return false;"
+         style="background:url('https://i.postimg.cc/JzcS5B7d/IMG-7393.webp') no-repeat center center/cover; color:#fff; font-weight:bold; text-shadow:1px 1px 4px #000;">
+         نسكافية بالبندق
+      </a>
+      <a href="#" onclick="openSugarPopup('نسكافية بالهيل'); return false;"
+         style="background:url('https://i.postimg.cc/RZ9DhV11/IMG-7394.png') no-repeat center center/cover; color:#fff; font-weight:bold; text-shadow:1px 1px 4px #000;">
+         نسكافية بالهيل
+      </a>
+      <a href="#" onclick="openSugarPopup('نسكافية لاتيه'); return false;"
+         style="background:url('https://i.postimg.cc/L4LDPF8x/IMG-7395.jpg') no-repeat center center/cover; color:#fff; font-weight:bold; text-shadow:1px 1px 4px #000;">
+         نسكافية لاتيه
+      </a>
+      <a href="#" onclick="openSugarPopup('كابتشينو'); return false;"
+         style="background:url('https://i.postimg.cc/MZ5cN9PW/IMG-7396.jpg') no-repeat center center/cover; color:#fff; font-weight:bold; text-shadow:1px 1px 4px #000;">
+         كابتشينو
+      </a>
+      <a href="#" onclick="openSugarPopup('اسبريسو'); return false;"
+         style="background:url('https://i.postimg.cc/MGs6tLZ4/IMG-7400.webp') no-repeat center center/cover; color:#fff; font-weight:bold; text-shadow:1px 1px 4px #000;">
+         اسب리스و
+      </a>
+      <a href="#" onclick="openSugarPopup('بلاك'); return false;"
+         style="background:url('https://i.postimg.cc/NMftHk14/IMG-7397.webp') no-repeat center center/cover; color:#fff; font-weight:bold; text-shadow:1px 1px 4px #000;">
+         بلاك
+      </a>
+      <a href="#" onclick="openSugarPopup('هوت شوكليت'); return false;"
+         style="background:url('https://i.postimg.cc/J4Tprcn8/IMG-7401.jpg') no-repeat center center/cover; color:#fff; font-weight:bold; text-shadow:1px 1px 4px #000;">
+         هوت شوكليت
+      </a>
+      <a href="#" onclick="openSugarPopup('زنجبيل بالحليب'); return false;"
+         style="background:url('https://i.postimg.cc/hv4PrqTH/IMG-7402.webp') no-repeat center center/cover; color:#fff; font-weight:bold; text-shadow:1px 1px 4px #000;">
+         زنجبيل بالحليب
+      </a>
+      <a href="#" onclick="openSugarPopup('شاي بالحليب'); return false;"
+         style="background:url('https://i.postimg.cc/Jh9pZrVz/IMG-7406.webp') no-repeat center center/cover; color:#fff; font-weight:bold; text-shadow:1px 1px 4px #000;">
+         شاي بالحليب
+      </a>
+      <a href="#" onclick="openSugarPopup('شاي كرك'); return false;"
+         style="background:url('https://i.postimg.cc/mDy7kBTq/IMG-7407.jpg') no-repeat center center/cover; color:#fff; font-weight:bold; text-shadow:1px 1px 4px #000;">
+         شاي كرك
+      </a>
+      <a href="#" onclick="openSugarPopup('حليب'); return false;"
+         style="background:url('https://i.postimg.cc/qRWHtVQs/IMG-7405.jpg') no-repeat center center/cover; color:#fff; font-weight:bold; text-shadow:1px 1px 4px #000;">
+         حليب
       </a>
     </div>
   </div>
 
+  <!-- coming soon page -->
+  <div id="coming-soon-page" class="page">
+    <div class="info" style="max-width: 300px;">
+      <h2>🚧 جاري العمل على هذه الصفحة</h2>
+      <p>هذه الصفحة قيد التطوير حالياً</p>
+      <a href="#" class="btn" onclick="goBack(); return false;">العودة للخلف</a>
+    </div>
+  </div>
+
+  <!-- cart -->
   <div id="cart-page" class="page">
     <h2>🛒 سلتك</h2>
     <ul id="cart-items" style="list-style:none; padding:0; font-size:18px;"></ul>
     <div style="margin-top:20px;">
-      <a href="#" class="btn" onclick="openClearConfirm()" style="background:#e74c3c;">🗑️ تفريغ السلة</a>
+      <a href="#" class="btn" onclick="openClearConfirm(); return false;" style="background:#e74c3c;">🗑️ تفريغ السلة</a>
+      <a href="#" class="btn" onclick="openOrderPopup(); return false;" style="background:#27ae60;">✅ تأكيد الطلب</a>
     </div>
   </div>
 </main>
 
 <footer>
-  <a href="#" class="btn back-btn" onclick="goBack()">⬅️ رجوع</a>
-  <a href="#" class="btn cart-btn" id="cart-action-btn" onclick="showCart()">🛒 تصفح سلتك</a>
+  <a href="#" class="btn back-btn" onclick="goBack(); return false;">⬅️ رجوع</a>
+  <a href="#" id="cart-action-btn" class="btn cart-btn" onclick="showCart(); return false;">🛒 السلة (<span id="cart-count">0</span>)</a>
 </footer>
 
 <!-- Toast -->
 <div id="toast"></div>
 
-<!-- نافذة اختيار السكر -->
+<!-- sugar popup -->
 <div class="popup-overlay" id="sugar-popup">
   <div class="popup">
     <h3 id="sugar-title"></h3>
     <div id="sugar-options"></div>
-    <a href="#" class="btn" style="background:#e74c3c;" onclick="closeSugarPopup()">❌ إلغاء</a>
+    <a href="#" class="btn" style="background:#e74c3c;" onclick="closeSugarPopup(); return false;">إلغاء</a>
   </div>
 </div>
 
-<!-- نافذة اختيار العدد -->
+<!-- qty popup -->
 <div class="popup-overlay" id="qty-popup">
   <div class="popup">
     <h3 id="qty-title">اختر العدد</h3>
     <div class="counter">
-      <button onclick="changeQty(-1)">➖</button>
+      <button onclick="changeQty(-1); return false;">➖</button>
       <span id="qty">1</span>
-      <button onclick="changeQty(1)">➕</button>
+      <button onclick="changeQty(1); return false;">➕</button>
     </div>
-    <a href="#" class="btn" onclick="confirmAdd()">✅ موافق</a>
-    <a href="#" class="btn" style="background:#e74c3c;" onclick="closeQtyPopup()">❌ إلغاء</a>
+    <a href="#" class="btn" onclick="confirmAdd(); return false;">✅ موافق</a>
+    <a href="#" class="btn" style="background:#e74c3c;" onclick="closeQtyPopup(); return false;">إلغاء</a>
   </div>
 </div>
 
-<!-- نافذة تأكيد تفريغ السلة -->
+<!-- confirm clear -->
 <div class="popup-overlay" id="clear-popup">
   <div class="popup dark-popup">
     <h3>⚠️ هل أنت متأكد من تفريغ السلة؟</h3>
-    <a href="#" class="btn" style="background:#e74c3c;" onclick="confirmClearCart()">✅ نعم</a>
-    <a href="#" class="btn" onclick="closeClearConfirm()">❌ إلغاء</a>
+    <a href="#" class="btn" style="background:#e74c3c;" onclick="confirmClearCart(); return false;">✅ نعم</a>
+    <a href="#" class="btn" onclick="closeClearConfirm(); return false;">❌ إلغاء</a>
   </div>
 </div>
 
-<!-- نافذة إرسال الطلب -->
+<!-- order popup -->
 <div class="popup-overlay" id="order-popup">
-  <div class="popup">
+  <div class="popup dark-popup">
     <h3>✅ تم حفظ طلبك</h3>
     <p>اضغط على إرسال لإرسال الطلب عبر واتساب</p>
-    <a href="#" class="btn" onclick="sendOrder()">📤 إرسال</a>
-    <a href="#" class="btn" style="background:#e74c3c;" onclick="closeOrderPopup()">❌ إلغاء</a>
+    <a href="#" class="btn" onclick="sendOrder(); return false;">📤 إرسال</a>
+    <a href="#" class="btn" style="background:#e74c3c;" onclick="closeOrderPopup(); return false;">❌ إلغاء</a>
   </div>
 </div>
 
@@ -339,6 +670,20 @@
   let currentQty = 1;
   const coffeeOptions = ["بدون إضافة سكر","القليل من السكر","وسط","فوق الوسط","حلوة","حلوة زيادة"];
 
+  // تعريف هرم الصفحات
+  const pageHierarchy = {
+    'home-page': null, // الصفحة الرئيسية لا يوجد فوقها صفحة
+    'menu-page': 'home-page',
+    'hot-page': 'menu-page',
+    'coffee-page': 'hot-page',
+    'nescafe-page': 'hot-page',
+    'coming-soon-page': 'menu-page', // أي صفحة تحت الإنشاء ترجع للقائمة
+    'cart-page': null // سيتم تحديد الصفحة الأم للسلة ديناميكياً
+  };
+
+  // متغير لتخزين الصفحة التي أتينا منها للسلة
+  let cartReferrer = '';
+
   function showToast(msg, type = "success") {
     const toast = document.getElementById("toast");
     toast.textContent = msg;
@@ -346,141 +691,257 @@
     setTimeout(() => { toast.className = toast.className.replace("show " + type, ""); }, 3000);
   }
 
+  function getCartTotal() {
+    return cart.reduce((s, it) => s + (it.qty || 0), 0);
+  }
+  
+  function updateCartCount() {
+    const el = document.getElementById("cart-count");
+    if (el) el.textContent = getCartTotal();
+  }
+
   function setCartBtnFor(pageId) {
     const cartBtn = document.getElementById("cart-action-btn");
+    if (!cartBtn) return;
     if (pageId === "cart-page") {
       cartBtn.textContent = "✅ نفذ الطلب";
-      cartBtn.onclick = openOrderPopup;
+      cartBtn.onclick = function(){ openOrderPopup(); return false; };
     } else {
-      cartBtn.textContent = "🛒 تصفح سلتك";
-      cartBtn.onclick = showCart;
+      cartBtn.innerHTML = '🛒 السلة (<span id="cart-count">'+ getCartTotal() +'</span>)';
+      cartBtn.onclick = function(){ showCart(); return false; };
     }
   }
 
   function showPage(pageId) {
     const currentPage = document.querySelector('.page.active');
-    if (currentPage && currentPage.id !== pageId) pageHistory.push(currentPage.id);
+    
     document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-    document.getElementById(pageId).classList.add('active');
-    document.querySelector('footer').style.display = (pageId === 'home-page') ? 'none' : 'flex';
-    setCartBtnFor(pageId);
+    
+    setTimeout(() => {
+      const target = document.getElementById(pageId);
+      if (target) target.classList.add('active');
+      document.querySelector('footer').style.display = (pageId === 'home-page') ? 'none' : 'flex';
+      setCartBtnFor(pageId);
+      
+      // Scroll to top when changing pages
+      window.scrollTo(0, 0);
+    }, 50);
+  }
+
+  function showComingSoon() {
+    showPage("coming-soon-page");
+    return false;
   }
 
   function goBack() {
-    if (pageHistory.length > 0) {
-      const lastPage = pageHistory.pop();
-      document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-      document.getElementById(lastPage).classList.add('active');
-      const footerEl = document.querySelector('footer');
-      footerEl.style.display = (lastPage === 'home-page') ? 'none' : 'flex';
-      setCartBtnFor(lastPage);
+    const currentPage = document.querySelector('.page.active');
+    if (!currentPage) return;
+    
+    const currentPageId = currentPage.id;
+    
+    // إذا كانت الصفحة الحالية هي السلة، نعود إلى الصفحة التي حفظناها
+    if (currentPageId === 'cart-page' && cartReferrer) {
+      showPage(cartReferrer);
+      return;
+    }
+    
+    // البحث عن الصفحة الأم في الهيكل الهرمي
+    const parentPage = pageHierarchy[currentPageId];
+    
+    if (parentPage) {
+      showPage(parentPage);
+    } else {
+      // إذا لم توجد صفحة أم، نعود للصفحة الرئيسية
+      showPage('home-page');
     }
   }
 
-  function openSugarPopup(item) {
-    currentItem = item;
-    document.getElementById("sugar-title").textContent = item;
-    const container = document.getElementById("sugar-options");
-    container.innerHTML = "";
+  function openSugarPopup(itemName) {
+    currentItem = itemName;
+    const sugarOptionsDiv = document.getElementById("sugar-options");
+    sugarOptionsDiv.innerHTML = "";
     coffeeOptions.forEach(opt => {
       const btn = document.createElement("a");
       btn.href = "#";
-      btn.className = "sugar-btn";
       btn.textContent = opt;
-      btn.onclick = () => { currentItem = item + " - " + opt; closeSugarPopup(); openQtyPopup(); };
-      container.appendChild(btn);
+      btn.className = "sugar-btn";
+      btn.onclick = function(e){
+        e.preventDefault();
+        openQtyPopup(itemName + " - " + opt);
+      };
+      sugarOptionsDiv.appendChild(btn);
     });
+    document.getElementById("sugar-title").textContent = "اختر السكر لـ " + itemName;
     document.getElementById("sugar-popup").style.display = "flex";
+    setTimeout(() => {
+      document.getElementById("sugar-popup").classList.add("active");
+    }, 10);
   }
-  function closeSugarPopup() { document.getElementById("sugar-popup").style.display = "none"; }
+  
+  function closeSugarPopup() { 
+    document.getElementById("sugar-popup").classList.remove("active");
+    setTimeout(() => {
+      document.getElementById("sugar-popup").style.display = "none";
+    }, 300);
+  }
 
-  function openQtyPopup() {
+  function openQtyPopup(fullItemName) {
+    currentItem = fullItemName;
     currentQty = 1;
     document.getElementById("qty").textContent = currentQty;
     document.getElementById("qty-title").textContent = currentItem;
     document.getElementById("qty-popup").style.display = "flex";
+    setTimeout(() => {
+      document.getElementById("qty-popup").classList.add("active");
+    }, 10);
+    closeSugarPopup();
   }
-  function closeQtyPopup() { document.getElementById("qty-popup").style.display = "none"; }
+  
+  function closeQtyPopup() { 
+    document.getElementById("qty-popup").classList.remove("active");
+    setTimeout(() => {
+      document.getElementById("qty-popup").style.display = "none";
+    }, 300);
+  }
+  
   function changeQty(val) {
-    currentQty += val;
-    if (currentQty < 1) currentQty = 1;
+    currentQty = Math.max(1, currentQty + val);
     if (currentQty > 99) currentQty = 99;
     document.getElementById("qty").textContent = currentQty;
   }
+
   function confirmAdd() {
-    const existing = cart.find(c => c.name === currentItem);
-    if (existing) { existing.qty += currentQty; } else { cart.push({ name: currentItem, qty: currentQty }); }
+    const existing = cart.find(c => c.item === currentItem);
+    if (existing) existing.qty += currentQty;
+    else cart.push({ item: currentItem, qty: currentQty });
     closeQtyPopup();
-    showToast("تمت إضافة " + currentItem + " × " + currentQty + " ✅", "success");
+    updateCartCount();
+    setCartBtnFor(document.querySelector('.page.active')?.id || '');
+    showToast(`تمت إضافة ${currentItem} (عدد ${currentQty}) ✅`);
   }
 
   function showCart() {
+    // حفظ الصفحة الحالية كمرجع للعودة إليها من السلة
+    const currentPage = document.querySelector('.page.active');
+    if (currentPage && currentPage.id !== 'cart-page') {
+      cartReferrer = currentPage.id;
+    }
+    
     const cartList = document.getElementById("cart-items");
     cartList.innerHTML = "";
     if (cart.length === 0) {
       cartList.innerHTML = "<li>🛒 السلة فارغة</li>";
     } else {
-      cart.forEach((item, i) => {
+      cart.forEach((c, index) => {
         const li = document.createElement("li");
         li.className = "cart-item";
-        const span = document.createElement("span");
-        span.textContent = `${item.name}`;
-        const qtyControl = document.createElement("div");
-        qtyControl.style.display = "flex";
-        qtyControl.style.alignItems = "center";
-        qtyControl.style.gap = "6px";
-        const minusBtn = document.createElement("button");
-        minusBtn.textContent = "➖";
-        minusBtn.className = "qty-btn";
-        minusBtn.onclick = () => {
-          if (item.qty > 1) {
-            item.qty--;
-            showCart();
-          }
-        };
-        const qtyLabel = document.createElement("span");
-        qtyLabel.textContent = item.qty;
-        const plusBtn = document.createElement("button");
-        plusBtn.textContent = "➕";
-        plusBtn.className = "qty-btn";
-        plusBtn.onclick = () => {
-          item.qty++;
-          showCart();
-        };
-        qtyControl.appendChild(minusBtn);
-        qtyControl.appendChild(qtyLabel);
-        qtyControl.appendChild(plusBtn);
-        const delBtn = document.createElement("button");
-        delBtn.className = "delete-btn";
-        delBtn.textContent = "🗑️";
-        delBtn.onclick = () => { cart.splice(i, 1); showCart(); };
-        li.appendChild(span);
-        li.appendChild(qtyControl);
-        li.appendChild(delBtn);
+
+        const nameSpan = document.createElement("div");
+        nameSpan.className = "name";
+        nameSpan.textContent = c.item;
+
+        const counterDiv = document.createElement("div");
+        counterDiv.className = "counter-inline";
+
+        const minus = document.createElement("button");
+        minus.className = "qty-btn";
+        minus.textContent = "➖";
+        minus.onclick = function(){ changeCartQty(index, -1); };
+
+        const qtySpan = document.createElement("span");
+        qtySpan.className = "qty-display";
+        qtySpan.textContent = `عدد ${c.qty}`;
+
+        const plus = document.createElement("button");
+        plus.className = "qty-btn";
+        plus.textContent = "➕";
+        plus.onclick = function(){ changeCartQty(index, 1); };
+
+        counterDiv.appendChild(minus);
+        counterDiv.appendChild(qtySpan);
+        counterDiv.appendChild(plus);
+
+        const del = document.createElement("button");
+        del.className = "delete-btn";
+        del.textContent = "حذف";
+        del.onclick = function(){ removeFromCart(index); };
+
+        li.appendChild(nameSpan);
+        li.appendChild(counterDiv);
+        li.appendChild(del);
+
         cartList.appendChild(li);
       });
     }
     showPage("cart-page");
+    updateCartCount();
   }
 
-  function openClearConfirm() { document.getElementById("clear-popup").style.display = "flex"; }
-  function closeClearConfirm() { document.getElementById("clear-popup").style.display = "none"; }
-  function confirmClearCart() { cart = []; closeClearConfirm(); showCart(); }
+  function changeCartQty(index, val) {
+    cart[index].qty = Math.max(1, cart[index].qty + val);
+    showCart();
+    updateCartCount();
+  }
 
-  function openOrderPopup() { 
-    if (cart.length === 0) {
-      showToast("⚠️ السلة فارغة", "error");
-      return;
+  function removeFromCart(index) {
+    cart.splice(index, 1);
+    showCart();
+    updateCartCount();
+  }
+
+  function openClearConfirm() { 
+    document.getElementById("clear-popup").style.display = "flex";
+    setTimeout(() => {
+      document.getElementById("clear-popup").classList.add("active");
+    }, 10);
+  }
+  
+  function closeClearConfirm() { 
+    document.getElementById("clear-popup").classList.remove("active");
+    setTimeout(() => {
+      document.getElementById("clear-popup").style.display = "none";
+    }, 300);
+  }
+  
+  function confirmClearCart() {
+    cart = [];
+    closeClearConfirm();
+    showCart();
+    updateCartCount();
+    showToast("تم تفريغ السلة ✅");
+  }
+
+  function openOrderPopup() {
+    if (cart.length === 0) { 
+      showToast("❌ السلة فارغة، أضف منتجات أولا", "error"); 
+      return; 
     }
-    document.getElementById("order-popup").style.display = "flex"; 
+    document.getElementById("order-popup").style.display = "flex";
+    setTimeout(() => {
+      document.getElementById("order-popup").classList.add("active");
+    }, 10);
   }
-  function closeOrderPopup() { document.getElementById("order-popup").style.display = "none"; }
+  
+  function closeOrderPopup() { 
+    document.getElementById("order-popup").classList.remove("active");
+    setTimeout(() => {
+      document.getElementById("order-popup").style.display = "none";
+    }, 300);
+  }
+
   function sendOrder() {
-    let msg = "طلب جديد من دارك كافيه:\n";
-    cart.forEach(item => { msg += `- ${item.name} × ${item.qty}\n`; });
-    let url = "https://wa.me/962787710009?text=" + encodeURIComponent(msg);
-    window.open(url, "_blank");
+    let orderText = "🛒 طلب جديد من دارك كافيه:\n\n";
+    cart.forEach(c => { orderText += `${c.item} (عدد ${c.qty})\n`; });
+    orderText += "\n📍 العنوان: الرمثا - مقابل مستشفى الرمثا";
+    const encodedText = encodeURIComponent(orderText);
+    window.open(`https://wa.me/962787710009?text=${encodedText}`, "_blank");
   }
+
+  // Initialize the page
+  document.addEventListener('DOMContentLoaded', () => {
+    showPage('home-page');
+    updateCartCount();
+  });
 </script>
 </body>
 </html>
