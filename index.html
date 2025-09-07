@@ -57,7 +57,7 @@
     }
     
     header h1 { 
-      font-size: 20px; /* تصغير حجم الخط */
+      font-size: 20px;
       font-weight: bold; 
       color: #fff; 
       margin: 0; 
@@ -122,7 +122,6 @@
       box-shadow: 0 4px 8px rgba(0,0,0,0.2);
     }
     
-    /* زر اطلب الآن - كبير وأحمر لامع */
     .order-now-btn {
       display: block;
       padding: 18px 35px;
@@ -462,26 +461,27 @@
       color:#fff; 
     }
     
+    /* تعديلات على التواست */
     #toast { 
-      visibility:hidden; 
-      min-width:250px; 
-      color:#fff; 
-      text-align:center; 
-      border-radius:8px; 
-      padding:12px; 
-      position:fixed; 
-      left:50%; 
-      bottom:30px; 
-      transform:translateX(-50%); 
-      z-index:3000; 
-      font-size:16px; 
+      visibility: hidden; 
+      min-width: 250px; 
+      color: #fff; 
+      text-align: center; 
+      border-radius: 8px; 
+      padding: 12px; 
+      position: fixed; 
+      left: 50%; 
+      z-index: 3000; 
+      font-size: 16px; 
       backdrop-filter: blur(4px);
       box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      transform: translateX(-50%);
+      bottom: 80px; /* فوق الفوتر مباشرة */
     }
     
     #toast.show { 
-      visibility:visible; 
-      animation:fadein 0.5s, fadeout 0.5s 2.5s; 
+      visibility: visible; 
+      animation: toast-fadein 0.5s, toast-fadeout 0.5s 2.5s; 
     }
     
     #toast.success { 
@@ -494,14 +494,14 @@
       border: 1px solid #c0392b;
     }
     
-    @keyframes fadein { 
-      from { bottom:0; opacity:0; } 
-      to { bottom:30px; opacity:1; } 
+    @keyframes toast-fadein { 
+      from { bottom: 60px; opacity: 0; } 
+      to { bottom: 80px; opacity: 1; } 
     }
     
-    @keyframes fadeout { 
-      from { bottom:30px; opacity:1; } 
-      to { bottom:0; opacity:0; } 
+    @keyframes toast-fadeout { 
+      from { bottom: 80px; opacity: 1; } 
+      to { bottom: 60px; opacity: 0; } 
     }
     
     @keyframes fadeIn {
@@ -513,8 +513,21 @@
     @media (max-width:420px) {
       .menu a { width:120px; height:120px; font-size:16px; }
       .cart-item .name { min-width:90px; }
-      header h1 { font-size: 18px; } /* تصغير إضافي للشاشات الصغيرة */
+      header h1 { font-size: 18px; }
       .popup { padding: 20px 15px; }
+      #toast {
+        min-width: 200px;
+        font-size: 14px;
+        bottom: 70px;
+      }
+      @keyframes toast-fadein { 
+        from { bottom: 50px; opacity: 0; } 
+        to { bottom: 70px; opacity: 1; } 
+      }
+      @keyframes toast-fadeout { 
+        from { bottom: 70px; opacity: 1; } 
+        to { bottom: 50px; opacity: 0; } 
+      }
     }
     
     /* تحسينات إضافية */
@@ -875,14 +888,14 @@
 
   // تعريف هرم الصفحات
   const pageHierarchy = {
-    'home-page': null, // الصفحة الرئيسية لا يوجد فوقها صفحة
+    'home-page': null,
     'menu-page': 'home-page',
     'hot-page': 'menu-page',
     'coffee-page': 'hot-page',
     'nescafe-page': 'hot-page',
     'herbs-page': 'hot-page',
-    'coming-soon-page': 'menu-page', // أي صفحة تحت الإنشاء ترجع للقائمة
-    'cart-page': null // سيتم تحديد الصفحة الأم للسلة ديناميكياً
+    'coming-soon-page': 'menu-page',
+    'cart-page': null
   };
 
   // متغير لتخزين الصفحة التي أتينا منها للسلة
@@ -1186,7 +1199,6 @@
   function sendOrder() {
     let orderText = "🛒 طلب جديد من دارك كافيه:\n\n";
     cart.forEach(c => { orderText += `${c.item} (عدد ${c.qty})\n`; });
-    // تم إزالة العنوان من الرسالة حسب الطلب
     const encodedText = encodeURIComponent(orderText);
     window.open(`https://wa.me/962787710009?text=${encodedText}`, "_blank");
   }
