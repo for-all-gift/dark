@@ -57,7 +57,7 @@
     }
     
     header h1 { 
-      font-size: 26px; 
+      font-size: 20px; /* تصغير حجم الخط */
       font-weight: bold; 
       color: #fff; 
       margin: 0; 
@@ -120,6 +120,31 @@
       background: #b07a4f; 
       transform: translateY(-2px);
       box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+    
+    /* زر اطلب الآن - كبير وأحمر لامع */
+    .order-now-btn {
+      display: block;
+      padding: 18px 35px;
+      margin: 25px auto;
+      background: linear-gradient(145deg, #ff3838, #ff0000);
+      color: #fff;
+      text-decoration: none;
+      border-radius: 12px;
+      font-size: 22px;
+      font-weight: bold;
+      transition: all 0.3s ease;
+      border: none;
+      cursor: pointer;
+      width: 80%;
+      max-width: 300px;
+      box-shadow: 0 6px 15px rgba(255, 56, 56, 0.4);
+    }
+    
+    .order-now-btn:hover {
+      background: linear-gradient(145deg, #ff0000, #ff3838);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(255, 56, 56, 0.6);
     }
     
     .call-btn { 
@@ -377,7 +402,6 @@
       gap:8px; 
       flex-wrap:wrap; 
       backdrop-filter: blur(4px);
-      animation: slideIn 0.3s ease;
     }
     
     .cart-item .name { 
@@ -485,22 +509,11 @@
       to { opacity: 1; }
     }
     
-    @keyframes slideIn {
-      from { 
-        opacity: 0;
-        transform: translateX(20px);
-      }
-      to { 
-        opacity: 1;
-        transform: translateX(0);
-      }
-    }
-    
     /* small responsive tweak */
     @media (max-width:420px) {
       .menu a { width:120px; height:120px; font-size:16px; }
       .cart-item .name { min-width:90px; }
-      header h1 { font-size: 22px; }
+      header h1 { font-size: 18px; } /* تصغير إضافي للشاشات الصغيرة */
       .popup { padding: 20px 15px; }
     }
     
@@ -660,7 +673,7 @@
     <div class="info">🚚 لدينا خدمة توصيل</div>
     <div class="info call-btn"><a href="tel:0787710009" style="color:#fff; text-decoration:none;">📞 اتصل الآن: 0787710009</a></div>
     <div class="info whatsapp-btn"><a href="https://wa.me/962787710009" target="_blank" style="color:#fff; text-decoration:none; display:flex; align-items:center; gap:6px;"><img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="واتساب"> تواصل عبر واتساب</a></div>
-    <a href="#" class="btn" onclick="showPage('menu-page'); return false;">اطلب الآن</a>
+    <a href="#" class="order-now-btn" onclick="showPage('menu-page'); return false;">اطلب الآن</a>
   </div>
 
   <!-- menu -->
@@ -1070,14 +1083,64 @@
 
   function changeCartQty(index, val) {
     cart[index].qty = Math.max(1, cart[index].qty + val);
-    showCart();
+    updateCartDisplay();
     updateCartCount();
   }
 
   function removeFromCart(index) {
     cart.splice(index, 1);
-    showCart();
+    updateCartDisplay();
     updateCartCount();
+  }
+
+  // دالة جديدة لتحديث عرض السلة بدون إعادة تحميل الصفحة
+  function updateCartDisplay() {
+    const cartList = document.getElementById("cart-items");
+    cartList.innerHTML = "";
+    if (cart.length === 0) {
+      cartList.innerHTML = "<li>🛒 السلة فارغة</li>";
+    } else {
+      cart.forEach((c, index) => {
+        const li = document.createElement("li");
+        li.className = "cart-item";
+
+        const nameSpan = document.createElement("div");
+        nameSpan.className = "name";
+        nameSpan.textContent = c.item;
+
+        const counterDiv = document.createElement("div");
+        counterDiv.className = "counter-inline";
+
+        const minus = document.createElement("button");
+        minus.className = "qty-btn";
+        minus.textContent = "➖";
+        minus.onclick = function(){ changeCartQty(index, -1); };
+
+        const qtySpan = document.createElement("span");
+        qtySpan.className = "qty-display";
+        qtySpan.textContent = `عدد ${c.qty}`;
+
+        const plus = document.createElement("button");
+        plus.className = "qty-btn";
+        plus.textContent = "➕";
+        plus.onclick = function(){ changeCartQty(index, 1); };
+
+        counterDiv.appendChild(minus);
+        counterDiv.appendChild(qtySpan);
+        counterDiv.appendChild(plus);
+
+        const del = document.createElement("button");
+        del.className = "delete-btn";
+        del.textContent = "حذف";
+        del.onclick = function(){ removeFromCart(index); };
+
+        li.appendChild(nameSpan);
+        li.appendChild(counterDiv);
+        li.appendChild(del);
+
+        cartList.appendChild(li);
+      });
+    }
   }
 
   function openClearConfirm() { 
@@ -1096,9 +1159,9 @@
   
   function confirmClearCart() {
     cart = [];
-    closeClearConfirm();
-    showCart();
+    updateCartDisplay();
     updateCartCount();
+    closeClearConfirm();
     showToast("تم تفريغ السلة ✅");
   }
 
@@ -1123,7 +1186,7 @@
   function sendOrder() {
     let orderText = "🛒 طلب جديد من دارك كافيه:\n\n";
     cart.forEach(c => { orderText += `${c.item} (عدد ${c.qty})\n`; });
-    orderText += "\n📍 العنوان: الرمثا - مقابل مستشفى الرمثا";
+    // تم إزالة العنوان من الرسالة حسب الطلب
     const encodedText = encodeURIComponent(orderText);
     window.open(`https://wa.me/962787710009?text=${encodedText}`, "_blank");
   }
