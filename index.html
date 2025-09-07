@@ -3,10 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>دارك كافيه</title>
+  <title>دارك كافيه | Dark Coffee</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     * {
       box-sizing: border-box;
@@ -62,6 +63,27 @@
       margin: 0; 
       margin-right: 12px; 
       white-space: nowrap; 
+    }
+    
+    .home-btn {
+      background: #ffffff;
+      color: #000000;
+      border: none;
+      padding: 8px 15px;
+      border-radius: 5px;
+      margin-right: auto;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-family: 'Cairo';
+      font-weight: bold;
+      transition: all 0.3s ease;
+    }
+    
+    .home-btn:hover {
+      background: #e0e0e0;
+      transform: translateY(-2px);
     }
     
     main { 
@@ -178,7 +200,7 @@
       box-shadow: 0 6px 12px rgba(0,0,0,0.15);
     }
     
-    #coffee-page .menu a, #nescafe-page .menu a { 
+    #coffee-page .menu a, #nescafe-page .menu a, #herbs-page .menu a { 
       background:#000; 
       color:#fff; 
     }
@@ -481,10 +503,151 @@
       header h1 { font-size: 22px; }
       .popup { padding: 20px 15px; }
     }
+    
+    /* تحسينات إضافية */
+    .herbs-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px;
+      margin-top: 20px;
+    }
+    
+    .herb-item {
+      background: rgba(0, 0, 0, 0.7);
+      border-radius: 10px;
+      padding: 15px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 140px;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+    }
+    
+    .herb-item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+    }
+    
+    .herb-item::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.6);
+      z-index: 1;
+    }
+    
+    .herb-name {
+      font-size: 18px;
+      font-weight: bold;
+      position: relative;
+      z-index: 2;
+      text-shadow: 1px 1px 4px #000;
+    }
+    
+    /* خلفيات الأزرار الجديدة */
+    .tea-bg {
+      background: url('https://i.postimg.cc/63HK8qY7/IMG-7409.webp') no-repeat center center/cover !important;
+    }
+    
+    .green-tea-bg {
+      background: url('https://i.postimg.cc/BnYQ8hbZ/IMG-7410.jpg') no-repeat center center/cover !important;
+    }
+    
+    .ginger-bg {
+      background: url('https://i.postimg.cc/tJNxZLYv/IMG-7411.webp') no-repeat center center/cover !important;
+    }
+    
+    .ginger-honey-bg {
+      background: url('https://i.postimg.cc/Wbf4WNL6/IMG-7413.jpg') no-repeat center center/cover !important;
+    }
+    
+    .syrian-herbs-bg {
+      background: url('https://i.postimg.cc/V6dwbMvx/IMG-7414.jpg') no-repeat center center/cover !important;
+    }
+    
+    .jordanian-herbs-bg {
+      background: url('https://i.postimg.cc/d1TXY9LV/IMG-7415.jpg') no-repeat center center/cover !important;
+    }
+    
+    .anise-bg {
+      background: url('https://i.postimg.cc/bwD1LVMr/IMG-7416.webp') no-repeat center center/cover !important;
+    }
+    
+    .cumin-bg {
+      background: url('https://i.postimg.cc/kXDSXh7s/IMG-7417.webp') no-repeat center center/cover !important;
+    }
+    
+    .cinnamon-bg {
+      background: url('https://i.postimg.cc/GpR9YMnZ/IMG-7418.jpg') no-repeat center center/cover !important;
+    }
+    
+    .mint-bg {
+      background: url('https://i.postimg.cc/43XNnmzG/IMG-7419.jpg') no-repeat center center/cover !important;
+    }
+    
+    .sage-bg {
+      background: url('https://i.postimg.cc/gc1hjHrP/IMG-7420.jpg') no-repeat center center/cover !important;
+    }
+    
+    /* إزالة زر الإضافة من الخلفية */
+    .herb-item .add-to-cart-btn {
+      display: none;
+    }
+    
+    /* تطبيق الطابع الغامق على أزرار صفحة نسكافيه */
+    .nescafe-item {
+      background: rgba(0, 0, 0, 0.7) !important;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 140px;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+    }
+    
+    .nescafe-item::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.6);
+      z-index: 1;
+    }
+    
+    .nescafe-item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+    }
+    
+    .nescafe-name {
+      font-size: 18px;
+      font-weight: bold;
+      position: relative;
+      z-index: 2;
+      text-shadow: 1px 1px 4px #000;
+      color: #fff;
+    }
   </style>
 </head>
 <body>
 <header>
+  <button class="home-btn" onclick="showPage('home-page')">
+    <i class="fas fa-home"></i> الرئيسية
+  </button>
   <img src="https://i.postimg.cc/3RPJLBDz/IMG-3262.jpg" alt="شعار دارك كافيه" />
   <h1>دارك كافيه | Dark Coffee</h1>
 </header>
@@ -521,7 +684,7 @@
     <div class="menu">
       <a href="#" onclick="showPage('coffee-page'); return false;" class="coffee-btn">القهوة</a>
       <a href="#" onclick="showPage('nescafe-page'); return false;" class="nescafe-btn">النسكافيه والمزيد</a>
-      <a href="#" onclick="showComingSoon(); return false;" class="herbs-btn">الأعشاب والمزيد</a>
+      <a href="#" onclick="showPage('herbs-page'); return false;" class="herbs-btn">الأعشاب والمزيد</a>
     </div>
   </div>
 
@@ -537,59 +700,86 @@
   <!-- nescafe with backgrounds (merged) -->
   <div id="nescafe-page" class="page">
     <h2>☕ النسكافيه والمزيد</h2>
-    <div class="menu">
-      <a href="#" onclick="openSugarPopup('نسكافية'); return false;"
-         style="background:url('https://i.postimg.cc/QMz94C0c/IMG-7391.jpg') no-repeat center center/cover; color:#fff; font-weight:bold; text-shadow:1px 1px 4px #000;">
-         نسكافية
-      </a>
-      <a href="#" onclick="openSugarPopup('نسكافية كراميل'); return false;"
-         style="background:url('https://i.postimg.cc/DzrH542M/IMG-7392.jpg') no-repeat center center/cover; color:#fff; font-weight:bold; text-shadow:1px 1px 4px #000;">
-         نسكافية كراميل
-      </a>
-      <a href="#" onclick="openSugarPopup('نسكافية بالبندق'); return false;"
-         style="background:url('https://i.postimg.cc/JzcS5B7d/IMG-7393.webp') no-repeat center center/cover; color:#fff; font-weight:bold; text-shadow:1px 1px 4px #000;">
-         نسكافية بالبندق
-      </a>
-      <a href="#" onclick="openSugarPopup('نسكافية بالهيل'); return false;"
-         style="background:url('https://i.postimg.cc/RZ9DhV11/IMG-7394.png') no-repeat center center/cover; color:#fff; font-weight:bold; text-shadow:1px 1px 4px #000;">
-         نسكافية بالهيل
-      </a>
-      <a href="#" onclick="openSugarPopup('نسكافية لاتيه'); return false;"
-         style="background:url('https://i.postimg.cc/L4LDPF8x/IMG-7395.jpg') no-repeat center center/cover; color:#fff; font-weight:bold; text-shadow:1px 1px 4px #000;">
-         نسكافية لاتيه
-      </a>
-      <a href="#" onclick="openSugarPopup('كابتشينو'); return false;"
-         style="background:url('https://i.postimg.cc/MZ5cN9PW/IMG-7396.jpg') no-repeat center center/cover; color:#fff; font-weight:bold; text-shadow:1px 1px 4px #000;">
-         كابتشينو
-      </a>
-      <a href="#" onclick="openSugarPopup('اسبريسو'); return false;"
-         style="background:url('https://i.postimg.cc/MGs6tLZ4/IMG-7400.webp') no-repeat center center/cover; color:#fff; font-weight:bold; text-shadow:1px 1px 4px #000;">
-         اسب리스و
-      </a>
-      <a href="#" onclick="openSugarPopup('بلاك'); return false;"
-         style="background:url('https://i.postimg.cc/NMftHk14/IMG-7397.webp') no-repeat center center/cover; color:#fff; font-weight:bold; text-shadow:1px 1px 4px #000;">
-         بلاك
-      </a>
-      <a href="#" onclick="openSugarPopup('هوت شوكليت'); return false;"
-         style="background:url('https://i.postimg.cc/J4Tprcn8/IMG-7401.jpg') no-repeat center center/cover; color:#fff; font-weight:bold; text-shadow:1px 1px 4px #000;">
-         هوت شوكليت
-      </a>
-      <a href="#" onclick="openSugarPopup('زنجبيل بالحليب'); return false;"
-         style="background:url('https://i.postimg.cc/hv4PrqTH/IMG-7402.webp') no-repeat center center/cover; color:#fff; font-weight:bold; text-shadow:1px 1px 4px #000;">
-         زنجبيل بالحليب
-      </a>
-      <a href="#" onclick="openSugarPopup('شاي بالحليب'); return false;"
-         style="background:url('https://i.postimg.cc/Jh9pZrVz/IMG-7406.webp') no-repeat center center/cover; color:#fff; font-weight:bold; text-shadow:1px 1px 4px #000;">
-         شاي بالحليب
-      </a>
-      <a href="#" onclick="openSugarPopup('شاي كرك'); return false;"
-         style="background:url('https://i.postimg.cc/mDy7kBTq/IMG-7407.jpg') no-repeat center center/cover; color:#fff; font-weight:bold; text-shadow:1px 1px 4px #000;">
-         شاي كرك
-      </a>
-      <a href="#" onclick="openSugarPopup('حليب'); return false;"
-         style="background:url('https://i.postimg.cc/qRWHtVQs/IMG-7405.jpg') no-repeat center center/cover; color:#fff; font-weight:bold; text-shadow:1px 1px 4px #000;">
-         حليب
-      </a>
+    <div class="herbs-grid">
+      <div class="nescafe-item" style="background:url('https://i.postimg.cc/QMz94C0c/IMG-7391.jpg') no-repeat center center/cover !important;" onclick="openSugarPopup('نسكافية')">
+        <div class="nescafe-name">نسكافية</div>
+      </div>
+      <div class="nescafe-item" style="background:url('https://i.postimg.cc/DzrH542M/IMG-7392.jpg') no-repeat center center/cover !important;" onclick="openSugarPopup('نسكافية كراميل')">
+        <div class="nescafe-name">نسكافية كراميل</div>
+      </div>
+      <div class="nescafe-item" style="background:url('https://i.postimg.cc/JzcS5B7d/IMG-7393.webp') no-repeat center center/cover !important;" onclick="openSugarPopup('نسكافية بالبندق')">
+        <div class="nescafe-name">نسكافية بالبندق</div>
+      </div>
+      <div class="nescafe-item" style="background:url('https://i.postimg.cc/RZ9DhV11/IMG-7394.png') no-repeat center center/cover !important;" onclick="openSugarPopup('نسكافية بالهيل')">
+        <div class="nescafe-name">نسكافية بالهيل</div>
+      </div>
+      <div class="nescafe-item" style="background:url('https://i.postimg.cc/L4LDPF8x/IMG-7395.jpg') no-repeat center center/cover !important;" onclick="openSugarPopup('نسكافية لاتيه')">
+        <div class="nescafe-name">نسكافية لاتيه</div>
+      </div>
+      <div class="nescafe-item" style="background:url('https://i.postimg.cc/MZ5cN9PW/IMG-7396.jpg') no-repeat center center/cover !important;" onclick="openSugarPopup('كابتشينو')">
+        <div class="nescafe-name">كابتشينو</div>
+      </div>
+      <div class="nescafe-item" style="background:url('https://i.postimg.cc/MGs6tLZ4/IMG-7400.webp') no-repeat center center/cover !important;" onclick="openSugarPopup('اسبريسو')">
+        <div class="nescafe-name">اسبريسو</div>
+      </div>
+      <div class="nescafe-item" style="background:url('https://i.postimg.cc/NMftHk14/IMG-7397.webp') no-repeat center center/cover !important;" onclick="openSugarPopup('بلاك')">
+        <div class="nescafe-name">بلاك</div>
+      </div>
+      <div class="nescafe-item" style="background:url('https://i.postimg.cc/J4Tprcn8/IMG-7401.jpg') no-repeat center center/cover !important;" onclick="openSugarPopup('هوت شوكليت')">
+        <div class="nescafe-name">هوت شوكليت</div>
+      </div>
+      <div class="nescafe-item" style="background:url('https://i.postimg.cc/hv4PrqTH/IMG-7402.webp') no-repeat center center/cover !important;" onclick="openSugarPopup('زنجبيل بالحليب')">
+        <div class="nescafe-name">زنجبيل بالحليب</div>
+      </div>
+      <div class="nescafe-item" style="background:url('https://i.postimg.cc/Jh9pZrVz/IMG-7406.webp') no-repeat center center/cover !important;" onclick="openSugarPopup('شاي بالحليب')">
+        <div class="nescafe-name">شاي بالحليب</div>
+      </div>
+      <div class="nescafe-item" style="background:url('https://i.postimg.cc/mDy7kBTq/IMG-7407.jpg') no-repeat center center/cover !important;" onclick="openSugarPopup('شاي كرك')">
+        <div class="nescafe-name">شاي كرك</div>
+      </div>
+      <div class="nescafe-item" style="background:url('https://i.postimg.cc/qRWHtVQs/IMG-7405.jpg') no-repeat center center/cover !important;" onclick="openSugarPopup('حليب')">
+        <div class="nescafe-name">حليب</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- herbs page -->
+  <div id="herbs-page" class="page">
+    <h2>🌿 الشاي والأعشاب</h2>
+    <div class="herbs-grid">
+      <div class="herb-item tea-bg" onclick="openSugarPopup('شاي')">
+        <div class="herb-name">شاي</div>
+      </div>
+      <div class="herb-item green-tea-bg" onclick="openSugarPopup('شاي أخضر')">
+        <div class="herb-name">شاي أخضر</div>
+      </div>
+      <div class="herb-item ginger-bg" onclick="openSugarPopup('زنجبيل')">
+        <div class="herb-name">زنجبيل</div>
+      </div>
+      <div class="herb-item ginger-honey-bg" onclick="openSugarPopup('زنجبيل بالعسل')">
+        <div class="herb-name">زنجبيل بالعسل</div>
+      </div>
+      <div class="herb-item syrian-herbs-bg" onclick="openSugarPopup('زهورات شامية')">
+        <div class="herb-name">زهورات شامية</div>
+      </div>
+      <div class="herb-item jordanian-herbs-bg" onclick="openSugarPopup('زهورات أردنية')">
+        <div class="herb-name">زهورات أردنية</div>
+      </div>
+      <div class="herb-item anise-bg" onclick="openSugarPopup('يانسون')">
+        <div class="herb-name">يانسون</div>
+      </div>
+      <div class="herb-item cumin-bg" onclick="openSugarPopup('كمون')">
+        <div class="herb-name">كمون</div>
+      </div>
+      <div class="herb-item cinnamon-bg" onclick="openSugarPopup('قرفة')">
+        <div class="herb-name">قرفة</div>
+      </div>
+      <div class="herb-item sage-bg" onclick="openSugarPopup('ميرمية')">
+        <div class="herb-name">ميرمية</div>
+      </div>
+      <div class="herb-item mint-bg" onclick="openSugarPopup('نعنع')">
+        <div class="herb-name">نعنع</div>
+      </div>
     </div>
   </div>
 
@@ -677,6 +867,7 @@
     'hot-page': 'menu-page',
     'coffee-page': 'hot-page',
     'nescafe-page': 'hot-page',
+    'herbs-page': 'hot-page',
     'coming-soon-page': 'menu-page', // أي صفحة تحت الإنشاء ترجع للقائمة
     'cart-page': null // سيتم تحديد الصفحة الأم للسلة ديناميكياً
   };
