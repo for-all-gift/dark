@@ -39,16 +39,15 @@
       margin-left: 10px;
     }
     header h1 {
-      font-size: 20px;
+      font-size: 26px;   /* تكبير العنوان */
       font-weight: bold;
       color: #fff;
       margin: 0;
+      margin-right: 12px; /* تقريبه لليسار */
       font-family: 'Cairo', sans-serif;
       white-space: nowrap;
     }
-    main {
-      padding: 90px 20px 70px;
-    }
+    main { padding: 90px 20px 70px; }
     .info {
       margin: 15px auto;
       padding: 12px;
@@ -114,42 +113,22 @@
       text-align: center;
     }
     #coffee-page .menu a { background: #000; color: #fff; }
-    .coffee-img {
-      width: 100%; height: 100%;
-      border-radius: 0;
-      object-fit: cover;
-    }
+    .coffee-img { width: 100%; height: 100%; object-fit: cover; }
     .hot-btn {
       background: url('https://i.postimg.cc/zXhsKkdv/IMG-7385.jpg') no-repeat center center/cover !important;
-      color: #fff !important;
-      font-weight: bold;
-      text-shadow: 1px 1px 4px #000;
+      color: #fff !important; font-weight: bold; text-shadow: 1px 1px 4px #000;
     }
     .coffee-btn {
       background: url('https://i.postimg.cc/P5c1HtMC/IMG-7382.webp') no-repeat center center/cover !important;
-      color: #fff !important;
-      font-weight: bold;
-      text-shadow: 1px 1px 4px #000;
+      color: #fff !important; font-weight: bold; text-shadow: 1px 1px 4px #000;
     }
     .nescafe-btn {
       background: url('https://i.postimg.cc/MZFBV6hd/IMG-7383.jpg') no-repeat center center/cover !important;
-      color: #fff !important;
-      font-weight: bold;
-      text-shadow: 1px 1px 4px #000;
+      color: #fff !important; font-weight: bold; text-shadow: 1px 1px 4px #000;
     }
     .herbs-btn {
       background: url('https://i.postimg.cc/yd5mTcfY/IMG-7384.webp') no-repeat center center/cover !important;
-      color: #fff !important;
-      font-weight: bold;
-      text-shadow: 1px 1px 4px #000;
-    }
-    #almid-page .random-btn,
-    #brazil-page .random-btn {
-      background: url('https://i.postimg.cc/vmT9gGFh/IMG-7373.jpg') no-repeat center center;
-      background-size: 200px 200px;
-      border: 2px solid #fff;
-      font-weight: bold;
-      color: #000;
+      color: #fff !important; font-weight: bold; text-shadow: 1px 1px 4px #000;
     }
     footer {
       position: fixed;
@@ -164,6 +143,7 @@
     footer .btn { padding: 8px 15px; font-size: 14px; }
     .back-btn { background: #e74c3c; }
     .cart-btn { background: #27ae60; }
+    /* popups */
     .popup-overlay {
       position: fixed;
       top: 0; left: 0; right: 0; bottom: 0;
@@ -174,46 +154,67 @@
       z-index: 2000;
     }
     .popup {
-      background: #fff;
+      background: url('https://i.postimg.cc/kM1GcB6Q/IMG-7373.jpg') no-repeat center center/cover;
       color: #000;
       padding: 20px;
       border-radius: 10px;
       text-align: center;
-      width: 300px;
+      width: 320px;
     }
-    .popup h3 { margin-top: 0; }
+    .popup h3 { margin-top: 0; color:#000; }
+    .sugar-btn {
+      display: block;
+      margin: 8px 0;
+      padding: 10px;
+      border-radius: 6px;
+      background: rgba(0,0,0,0.7);
+      color: #fff;
+      font-size: 16px;
+      text-decoration: none;
+    }
     .counter {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      margin: 15px 0;
-      font-size: 20px;
-      gap: 10px;
+      display: flex; justify-content: center; align-items: center;
+      margin: 15px 0; font-size: 20px; gap: 10px;
     }
-    .counter button {
-      padding: 5px 10px;
-      font-size: 20px;
-      cursor: pointer;
-    }
+    .counter button { padding: 5px 10px; font-size: 20px; cursor: pointer; }
     .cart-item {
       background: rgba(255,255,255,0.1);
-      padding: 12px;
-      margin: 8px 0;
-      border-radius: 8px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+      padding: 12px; margin: 8px 0; border-radius: 8px;
+      display: flex; justify-content: space-between; align-items: center;
     }
     .cart-item span { flex-grow: 1; text-align: right; }
-    .cart-item button {
-      margin-left: 5px;
-      padding: 4px 8px;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
+    .delete-btn { background: #e74c3c; color: #fff; border:none; padding:4px 8px; border-radius:4px; }
+    .qty-btn { background: #3498db; color: #fff; border:none; padding:4px 8px; border-radius:4px; }
+    /* نافذة تأكيد تفريغ السلة بخلفية سوداء ضبابية */
+    .dark-popup {
+      background: rgba(0,0,0,0.75);
+      backdrop-filter: blur(6px);
+      color: #fff;
     }
-    .delete-btn { background: #e74c3c; color: #fff; }
-    .qty-btn { background: #3498db; color: #fff; }
+    .dark-popup h3 { color:#fff; }
+    /* Toast */
+    #toast {
+      visibility: hidden;
+      min-width: 250px;
+      color: #fff;
+      text-align: center;
+      border-radius: 8px;
+      padding: 12px;
+      position: fixed;
+      left: 50%;
+      bottom: 30px;
+      transform: translateX(-50%);
+      z-index: 3000;
+      font-size: 16px;
+    }
+    #toast.show {
+      visibility: visible;
+      animation: fadein 0.5s, fadeout 0.5s 2.5s;
+    }
+    #toast.success { background-color: rgba(39, 174, 96, 0.9); } /* أخضر */
+    #toast.error { background-color: rgba(231, 76, 60, 0.9); }   /* أحمر */
+    @keyframes fadein { from {bottom: 0; opacity: 0;} to {bottom: 30px; opacity: 1;} }
+    @keyframes fadeout { from {bottom: 30px; opacity: 1;} to {bottom: 0; opacity: 0;} }
   </style>
 </head>
 <body>
@@ -236,6 +237,7 @@
     </div>
     <a href="#" class="btn" onclick="showPage('menu-page')">اطلب الآن</a>
   </div>
+
   <div id="menu-page" class="page">
     <h2>🍽️ قائمة المنتجات</h2>
     <div class="menu">
@@ -249,6 +251,7 @@
       <a href="#">➕ المزيد</a>
     </div>
   </div>
+
   <div id="hot-page" class="page">
     <h2>☕ المشروبات الساخنة</h2>
     <div class="menu">
@@ -257,49 +260,69 @@
       <a href="#" class="herbs-btn">الأعشاب والمزيد</a>
     </div>
   </div>
+
   <div id="coffee-page" class="page">
     <h2>☕ القهوة</h2>
     <div class="menu">
-      <a href="#" onclick="showPage('almid-page')">
+      <a href="#" onclick="openSugarPopup('قهوة العميد')">
         <img src="https://i.postimg.cc/bwSFQ99K/IMG-7370.jpg" alt="قهوة العميد" class="coffee-img">
       </a>
-      <a href="#" onclick="showPage('brazil-page')">
+      <a href="#" onclick="openSugarPopup('قهوة البرازيلي')">
         <img src="https://i.postimg.cc/tR1S0zL7/IMG-7371.png" alt="قهوة البرازيلي" class="coffee-img">
       </a>
     </div>
   </div>
-  <div id="almid-page" class="page">
-    <h2>☕ قهوة العميد</h2>
-    <div id="almid-options" class="menu"></div>
-  </div>
-  <div id="brazil-page" class="page">
-    <h2>☕ قهوة البرازيلي</h2>
-    <div id="brazil-options" class="menu"></div>
-  </div>
+
   <div id="cart-page" class="page">
     <h2>🛒 سلتك</h2>
     <ul id="cart-items" style="list-style:none; padding:0; font-size:18px;"></ul>
     <div style="margin-top:20px;">
-      <a href="#" class="btn" onclick="clearCart()" style="background:#e74c3c;">🗑️ تفريغ السلة</a>
+      <a href="#" class="btn" onclick="openClearConfirm()" style="background:#e74c3c;">🗑️ تفريغ السلة</a>
     </div>
   </div>
 </main>
+
 <footer>
   <a href="#" class="btn back-btn" onclick="goBack()">⬅️ رجوع</a>
   <a href="#" class="btn cart-btn" id="cart-action-btn" onclick="showCart()">🛒 تصفح سلتك</a>
 </footer>
-<div class="popup-overlay" id="popup">
+
+<!-- Toast -->
+<div id="toast"></div>
+
+<!-- نافذة اختيار السكر -->
+<div class="popup-overlay" id="sugar-popup">
   <div class="popup">
-    <h3 id="popup-title">اختر العدد</h3>
+    <h3 id="sugar-title"></h3>
+    <div id="sugar-options"></div>
+    <a href="#" class="btn" style="background:#e74c3c;" onclick="closeSugarPopup()">❌ إلغاء</a>
+  </div>
+</div>
+
+<!-- نافذة اختيار العدد -->
+<div class="popup-overlay" id="qty-popup">
+  <div class="popup">
+    <h3 id="qty-title">اختر العدد</h3>
     <div class="counter">
       <button onclick="changeQty(-1)">➖</button>
       <span id="qty">1</span>
       <button onclick="changeQty(1)">➕</button>
     </div>
     <a href="#" class="btn" onclick="confirmAdd()">✅ موافق</a>
-    <a href="#" class="btn" style="background:#e74c3c;" onclick="closePopup()">❌ إلغاء</a>
+    <a href="#" class="btn" style="background:#e74c3c;" onclick="closeQtyPopup()">❌ إلغاء</a>
   </div>
 </div>
+
+<!-- نافذة تأكيد تفريغ السلة -->
+<div class="popup-overlay" id="clear-popup">
+  <div class="popup dark-popup">
+    <h3>⚠️ هل أنت متأكد من تفريغ السلة؟</h3>
+    <a href="#" class="btn" style="background:#e74c3c;" onclick="confirmClearCart()">✅ نعم</a>
+    <a href="#" class="btn" onclick="closeClearConfirm()">❌ إلغاء</a>
+  </div>
+</div>
+
+<!-- نافذة إرسال الطلب -->
 <div class="popup-overlay" id="order-popup">
   <div class="popup">
     <h3>✅ تم حفظ طلبك</h3>
@@ -308,29 +331,22 @@
     <a href="#" class="btn" style="background:#e74c3c;" onclick="closeOrderPopup()">❌ إلغاء</a>
   </div>
 </div>
+
 <script>
   let pageHistory = [];
   let cart = [];
   let currentItem = "";
   let currentQty = 1;
-  const coffeeOptions = [
-    "بدون إضافة سكر", // ✅ أزلنا كلمة (سادة)
-    "القليل من السكر",
-    "وسط",
-    "فوق الوسط",
-    "حلوة",
-    "حلوة زيادة"
-  ];
-  function showPage(pageId) {
-    const currentPage = document.querySelector('.page.active');
-    if (currentPage) {
-      if (currentPage.id !== pageId) {
-        pageHistory.push(currentPage.id);
-      }
-      currentPage.classList.remove('active');
-    }
-    document.getElementById(pageId).classList.add('active');
-    document.querySelector('footer').style.display = (pageId === 'home-page') ? 'none' : 'flex';
+  const coffeeOptions = ["بدون إضافة سكر","القليل من السكر","وسط","فوق الوسط","حلوة","حلوة زيادة"];
+
+  function showToast(msg, type = "success") {
+    const toast = document.getElementById("toast");
+    toast.textContent = msg;
+    toast.className = "show " + type;
+    setTimeout(() => { toast.className = toast.className.replace("show " + type, ""); }, 3000);
+  }
+
+  function setCartBtnFor(pageId) {
     const cartBtn = document.getElementById("cart-action-btn");
     if (pageId === "cart-page") {
       cartBtn.textContent = "✅ نفذ الطلب";
@@ -340,26 +356,51 @@
       cartBtn.onclick = showCart;
     }
   }
+
+  function showPage(pageId) {
+    const currentPage = document.querySelector('.page.active');
+    if (currentPage && currentPage.id !== pageId) pageHistory.push(currentPage.id);
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.getElementById(pageId).classList.add('active');
+    document.querySelector('footer').style.display = (pageId === 'home-page') ? 'none' : 'flex';
+    setCartBtnFor(pageId);
+  }
+
   function goBack() {
     if (pageHistory.length > 0) {
       const lastPage = pageHistory.pop();
-      document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
+      document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
       document.getElementById(lastPage).classList.add('active');
-      if (lastPage === 'home-page') {
-        document.querySelector('footer').style.display = 'none';
-      }
+      const footerEl = document.querySelector('footer');
+      footerEl.style.display = (lastPage === 'home-page') ? 'none' : 'flex';
+      setCartBtnFor(lastPage);
     }
   }
-  function openPopup(item) {
+
+  function openSugarPopup(item) {
     currentItem = item;
+    document.getElementById("sugar-title").textContent = item;
+    const container = document.getElementById("sugar-options");
+    container.innerHTML = "";
+    coffeeOptions.forEach(opt => {
+      const btn = document.createElement("a");
+      btn.href = "#";
+      btn.className = "sugar-btn";
+      btn.textContent = opt;
+      btn.onclick = () => { currentItem = item + " - " + opt; closeSugarPopup(); openQtyPopup(); };
+      container.appendChild(btn);
+    });
+    document.getElementById("sugar-popup").style.display = "flex";
+  }
+  function closeSugarPopup() { document.getElementById("sugar-popup").style.display = "none"; }
+
+  function openQtyPopup() {
     currentQty = 1;
     document.getElementById("qty").textContent = currentQty;
-    document.getElementById("popup-title").textContent = item;
-    document.getElementById("popup").style.display = "flex";
+    document.getElementById("qty-title").textContent = currentItem;
+    document.getElementById("qty-popup").style.display = "flex";
   }
-  function closePopup() {
-    document.getElementById("popup").style.display = "none";
-  }
+  function closeQtyPopup() { document.getElementById("qty-popup").style.display = "none"; }
   function changeQty(val) {
     currentQty += val;
     if (currentQty < 1) currentQty = 1;
@@ -368,14 +409,11 @@
   }
   function confirmAdd() {
     const existing = cart.find(c => c.name === currentItem);
-    if (existing) {
-      existing.qty += currentQty;
-    } else {
-      cart.push({ name: currentItem, qty: currentQty });
-    }
-    closePopup();
-    alert("تمت إضافة " + currentItem + " عدد " + currentQty + " ✅");
+    if (existing) { existing.qty += currentQty; } else { cart.push({ name: currentItem, qty: currentQty }); }
+    closeQtyPopup();
+    showToast("تمت إضافة " + currentItem + " × " + currentQty + " ✅", "success");
   }
+
   function showCart() {
     const cartList = document.getElementById("cart-items");
     cartList.innerHTML = "";
@@ -386,75 +424,63 @@
         const li = document.createElement("li");
         li.className = "cart-item";
         const span = document.createElement("span");
-        span.textContent = `${item.name} - عدد ${item.qty}`;
+        span.textContent = `${item.name}`;
+        const qtyControl = document.createElement("div");
+        qtyControl.style.display = "flex";
+        qtyControl.style.alignItems = "center";
+        qtyControl.style.gap = "6px";
+        const minusBtn = document.createElement("button");
+        minusBtn.textContent = "➖";
+        minusBtn.className = "qty-btn";
+        minusBtn.onclick = () => {
+          if (item.qty > 1) {
+            item.qty--;
+            showCart();
+          }
+        };
+        const qtyLabel = document.createElement("span");
+        qtyLabel.textContent = item.qty;
+        const plusBtn = document.createElement("button");
+        plusBtn.textContent = "➕";
+        plusBtn.className = "qty-btn";
+        plusBtn.onclick = () => {
+          item.qty++;
+          showCart();
+        };
+        qtyControl.appendChild(minusBtn);
+        qtyControl.appendChild(qtyLabel);
+        qtyControl.appendChild(plusBtn);
         const delBtn = document.createElement("button");
         delBtn.className = "delete-btn";
         delBtn.textContent = "🗑️";
         delBtn.onclick = () => { cart.splice(i, 1); showCart(); };
-        const qtyBtn = document.createElement("button");
-        qtyBtn.className = "qty-btn";
-        qtyBtn.textContent = "🔢";
-        qtyBtn.onclick = () => {
-          const newQty = prompt("أدخل العدد الجديد:", item.qty);
-          if (newQty && !isNaN(newQty) && newQty > 0) {
-            item.qty = parseInt(newQty);
-            showCart();
-          }
-        };
         li.appendChild(span);
-        li.appendChild(qtyBtn);
+        li.appendChild(qtyControl);
         li.appendChild(delBtn);
         cartList.appendChild(li);
       });
     }
-    showPage('cart-page');
+    showPage("cart-page");
   }
-  function clearCart() {
-    cart = [];
-    showCart();
-  }
-  function openOrderPopup() {
+
+  function openClearConfirm() { document.getElementById("clear-popup").style.display = "flex"; }
+  function closeClearConfirm() { document.getElementById("clear-popup").style.display = "none"; }
+  function confirmClearCart() { cart = []; closeClearConfirm(); showCart(); }
+
+  function openOrderPopup() { 
     if (cart.length === 0) {
-      alert("⚠️ السلة فارغة، أضف منتجات أولاً");
+      showToast("⚠️ السلة فارغة", "error");
       return;
     }
-    document.getElementById("order-popup").style.display = "flex";
+    document.getElementById("order-popup").style.display = "flex"; 
   }
-  function closeOrderPopup() {
-    document.getElementById("order-popup").style.display = "none";
-  }
+  function closeOrderPopup() { document.getElementById("order-popup").style.display = "none"; }
   function sendOrder() {
-    if (cart.length === 0) {
-      alert("⚠️ السلة فارغة، أضف منتجات أولاً");
-      return;
-    }
-    let orderText = "🛒 طلب جديد من دارك كافيه:\n\n";
-    cart.forEach((item) => {
-      orderText += `- ${item.name} (عدد ${item.qty})\n`;
-    });
-    const phoneNumber = "962787710009";
-    const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(orderText)}`;
+    let msg = "طلب جديد من دارك كافيه:\n";
+    cart.forEach(item => { msg += `- ${item.name} × ${item.qty}\n`; });
+    let url = "https://wa.me/962787710009?text=" + encodeURIComponent(msg);
     window.open(url, "_blank");
-    closeOrderPopup();
   }
-  window.onload = function() {
-    const almidContainer = document.getElementById("almid-options");
-    const brazilContainer = document.getElementById("brazil-options");
-    coffeeOptions.forEach((option) => {
-      const btn1 = document.createElement("a");
-      btn1.className = "random-btn";
-      btn1.href = "#";
-      btn1.textContent = option;
-      btn1.onclick = () => openPopup("قهوة العميد - " + option);
-      almidContainer.appendChild(btn1);
-      const btn2 = document.createElement("a");
-      btn2.className = "random-btn";
-      btn2.href = "#";
-      btn2.textContent = option;
-      btn2.onclick = () => openPopup("قهوة البرازيلي - " + option);
-      brazilContainer.appendChild(btn2);
-    });
-  };
 </script>
 </body>
 </html>
