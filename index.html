@@ -122,6 +122,7 @@
       box-shadow: 0 4px 8px rgba(0,0,0,0.2);
     }
     
+    /* زر اطلب الآن المعدل مع تأثير اللمعان */
     .order-now-btn {
       display: block;
       padding: 18px 35px;
@@ -138,12 +139,51 @@
       width: 80%;
       max-width: 300px;
       box-shadow: 0 6px 15px rgba(255, 56, 56, 0.4);
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
+    }
+    
+    .order-now-btn::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(
+        to bottom right,
+        rgba(255,255,255,0.3),
+        rgba(255,255,255,0.1)
+      );
+      transform: rotate(45deg);
+      animation: shine 3s infinite;
+      z-index: -1;
     }
     
     .order-now-btn:hover {
       background: linear-gradient(145deg, #ff0000, #ff3838);
-      transform: translateY(-3px);
-      box-shadow: 0 8px 20px rgba(255, 56, 56, 0.6);
+      transform: translateY(-3px) scale(1.05);
+      box-shadow: 0 8px 25px rgba(255, 56, 56, 0.6);
+    }
+    
+    .order-now-btn:hover::before {
+      animation: shine 1s infinite;
+    }
+    
+    @keyframes shine {
+      0% {
+        left: -100%;
+        top: -100%;
+      }
+      20% {
+        left: 100%;
+        top: 100%;
+      }
+      100% {
+        left: 100%;
+        top: 100%;
+      }
     }
     
     .call-btn { 
